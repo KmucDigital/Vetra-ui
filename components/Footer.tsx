@@ -13,13 +13,13 @@ export function Footer() {
           {/* Footer Columns - 4 Groups */}
           {siteConfig.footer.columns.map((column) => (
             <div key={column.title}>
-              <h3 className="text-sm font-bold mb-6 text-white tracking-wide">{column.title}</h3>
+              <h3 className="text-sm font-bold mb-6 text-white tracking-wide uppercase">{column.title}</h3>
               <ul className="space-y-4">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-zinc-400 hover:text-white transition-colors duration-200"
+                      className="text-sm text-zinc-200 hover:text-white transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -37,7 +37,7 @@ export function Footer() {
               <Link href="/" className="flex items-center mb-3">
                 <div className="text-xl md:text-2xl font-bold tracking-tight">{siteConfig.name}</div>
               </Link>
-              <p className="text-sm text-zinc-400 leading-relaxed max-w-md">
+              <p className="text-sm text-zinc-200 leading-relaxed max-w-md">
                 {siteConfig.description}
               </p>
             </div>
@@ -46,7 +46,7 @@ export function Footer() {
                 <Link
                   key={social.name}
                   href={social.href}
-                  className="text-zinc-400 hover:text-white transition-colors duration-200 p-2 hover:bg-zinc-800 rounded-lg"
+                  className="text-zinc-200 hover:text-white transition-colors duration-200 p-2 hover:bg-zinc-800 rounded-lg"
                   aria-label={social.name}
                 >
                   {social.icon === "discord" && <MessageCircle className="h-5 w-5" />}
@@ -60,11 +60,11 @@ export function Footer() {
         </div>
 
         {/* Copyright & Disclaimer */}
-        <div className="pt-10 border-t border-zinc-800/50 space-y-3">
-          <p className="text-sm text-zinc-500 text-center sm:text-left">
-            Copyright © {currentYear} {siteConfig.name}. Created by Sebastian Lui. All Rights Reserved.
+        <div className="pt-10 border-t border-zinc-800/50 space-y-4">
+          <p className="text-sm text-zinc-200 text-center sm:text-left">
+            Copyright (c) {currentYear} {siteConfig.name}. Created by Sebastian Lui. All Rights Reserved.
           </p>
-          <p className="text-xs text-zinc-600 text-center sm:text-left">
+          <p className="text-sm text-zinc-300 text-center sm:text-left leading-relaxed">
             Dies ist ein Open-Source-Template (MIT License). Alle Inhalte dienen nur zur Demonstration.
             Vetra UI ist kein kommerzielles Produkt. Die dargestellten Preise, Features und Firmennamen sind Beispiele.
           </p>

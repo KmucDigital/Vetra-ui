@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +17,7 @@ export function PricingToggle({ isAnnual, onToggle }: PricingToggleProps) {
         onClick={() => onToggle(false)}
         className={cn(
           "text-base font-medium transition-colors",
-          !isAnnual ? "text-white" : "text-zinc-500 hover:text-zinc-400"
+          !isAnnual ? "text-white" : "text-zinc-300 hover:text-zinc-200"
         )}
       >
         Monthly
@@ -32,10 +31,9 @@ export function PricingToggle({ isAnnual, onToggle }: PricingToggleProps) {
           isAnnual ? "bg-white" : "bg-zinc-700"
         )}
       >
-        <motion.span
-          layout
+        <span
           className={cn(
-            "inline-block h-6 w-6 transform rounded-full bg-black transition-transform",
+            "inline-block h-6 w-6 transform rounded-full bg-black transition-transform duration-300 ease-out",
             isAnnual ? "translate-x-7" : "translate-x-1"
           )}
         />
@@ -46,7 +44,7 @@ export function PricingToggle({ isAnnual, onToggle }: PricingToggleProps) {
           onClick={() => onToggle(true)}
           className={cn(
             "text-base font-medium transition-colors",
-            isAnnual ? "text-white" : "text-zinc-500 hover:text-zinc-400"
+            isAnnual ? "text-white" : "text-zinc-300 hover:text-zinc-200"
           )}
         >
           Annual
@@ -54,16 +52,10 @@ export function PricingToggle({ isAnnual, onToggle }: PricingToggleProps) {
 
         {/* Badge */}
         {isAnnual && (
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-          >
-            <Badge variant="success" className="px-2 py-1 text-xs">
-              <Sparkles className="w-3 h-3 mr-1" />
-              2 MONTHS FREE
-            </Badge>
-          </motion.div>
+          <Badge variant="success" className="px-2 py-1 text-xs animate-fade-in">
+            <Sparkles className="w-3 h-3 mr-1" />
+            2 MONTHS FREE
+          </Badge>
         )}
       </div>
     </div>

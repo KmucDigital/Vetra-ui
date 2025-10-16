@@ -1,7 +1,4 @@
-# Vetra UI - Production Dockerfile
-# Supports both static (:static) and dynamic (:dynamic) runtime modes
-
-ARG RUNTIME_MODE=static
+# Vetra UI - Production Dockerfile (static export)
 
 # Stage 1: Dependencies
 FROM node:20-alpine AS deps
@@ -18,17 +15,14 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-ARG RUNTIME_MODE=static
-ENV NEXT_RUNTIME_MODE=:${RUNTIME_MODE}
-
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
-RUN if [ "${RUNTIME_MODE}" = "dynamic" ]; then pnpm build:dynamic; else pnpm build:static; fi
+RUN pnpm build
 
-# Stage 3a: Static runner (nginx)
-FROM nginx:alpine AS static-runner
+# Stage 3: Static runner (nginx)
+FROM nginx:alpine AS runner
 RUN apk add --no-cache wget
 
 WORKDIR /usr/share/nginx/html
@@ -42,24 +36,3 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
-
-# Stage 3b: Dynamic runner (Next.js standalone)
-FROM node:20-alpine AS dynamic-runner
-WORKDIR /app
-ENV NODE_ENV=production
-
-RUN apk add --no-cache curl
-
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-
-HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=5 \
-  CMD curl -fsS http://localhost:3000/ || exit 1
-
-EXPOSE 3000
-CMD ["node", "server.js"]
-
-# Final stage selector
-ARG RUNTIME_MODE=static
-FROM ${RUNTIME_MODE}-runner

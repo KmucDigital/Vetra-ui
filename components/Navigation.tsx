@@ -27,7 +27,7 @@ export function Navigation() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200"
+                className="text-sm font-medium text-zinc-300 hover:text-white transition-colors duration-200"
               >
                 {item.label}
               </Link>
@@ -65,7 +65,7 @@ export function Navigation() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-base font-medium text-zinc-400 hover:text-white transition-colors duration-200"
+                  className="text-base font-medium text-zinc-300 hover:text-white transition-colors duration-200"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}

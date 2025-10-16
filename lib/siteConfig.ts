@@ -1,11 +1,11 @@
 export const siteConfig = {
   name: "Vetra UI",
   description: "UI Library for Design Engineers",
-  longDescription: "Beautifully designed, animated components and templates built with Tailwind CSS, React, and Framer Motion.",
+  longDescription: "Beautifully designed, animated components and templates built with Tailwind CSS, React, and modern CSS animations.",
 
   hero: {
     headline: "Vetra UI is the new way to build landing pages.",
-    subheadline: "Beautifully designed, animated components and templates built with Tailwind CSS, React, and Framer Motion. Free and open source template for your next project.",
+    subheadline: "Beautifully designed, animated components and templates built with Tailwind CSS, React, and modern CSS animations. Free and open source template for your next project.",
     ctaText: "View on GitHub",
     ctaLink: "https://github.com/kmucdigital/vetra-ui",
   },

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
 import { Button } from "@/components/ui/button";
@@ -27,7 +26,7 @@ export function Pricing() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
             {siteConfig.pricing.headline}
           </h2>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-200 max-w-2xl mx-auto leading-relaxed">
             {siteConfig.pricing.subheadline}
           </p>
 
@@ -40,14 +39,7 @@ export function Pricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {siteConfig.pricing.plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-            >
+            <div key={plan.name} className="transition-transform duration-300 hover:-translate-y-2">
               <Card
                 className={cn(
                   "relative h-full flex flex-col transition-all duration-300 border-zinc-800/50 bg-zinc-900/50 backdrop-blur-sm hover:border-zinc-700 hover:shadow-2xl",
@@ -85,9 +77,9 @@ export function Pricing() {
                       <li key={feature} className="flex items-start gap-3">
                         <Check className={cn(
                           "h-5 w-5 shrink-0 mt-0.5",
-                          plan.highlighted ? "text-purple-400" : "text-zinc-400"
+                          plan.highlighted ? "text-purple-300" : "text-zinc-300"
                         )} />
-                        <span className="text-sm text-zinc-300">
+                        <span className="text-sm text-zinc-200/90 leading-relaxed">
                           {feature}
                         </span>
                       </li>
@@ -109,7 +101,7 @@ export function Pricing() {
                   </Button>
                 </CardFooter>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
