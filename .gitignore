@@ -8,13 +8,16 @@
 *.swp
 *.swo
 *~
+# Claude
+.claude
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-
+node_modules
+nul
 # testing
 /coverage
 
