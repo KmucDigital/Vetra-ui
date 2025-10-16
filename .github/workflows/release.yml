@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  discussions: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Verify static artefact
+        run: test -f out/index.html
+
+      - name: Create release artifact
+        run: |
+          tar -czf vetra-ui-static-export.tar.gz -C out .
+          sha256sum vetra-ui-static-export.tar.gz > vetra-ui-static-export.tar.gz.sha256
+
+      - name: Publish GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: Vetra UI ${{ github.ref_name }}
+          body: |
+            ## Changelog
+            This release was generated automatically. Detailed commit history is available below.
+
+            - Auto-generated release notes provided by GitHub
+          artifacts: |
+            vetra-ui-static-export.tar.gz
+            vetra-ui-static-export.tar.gz.sha256
+          generateReleaseNotes: true

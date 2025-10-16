@@ -1,9 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/lib/siteConfig";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({
+  variable: "--font-sans",
+  display: "swap",
+  preload: true,
+  src: [
+    {
+      path: "./fonts/Inter-latin-wght-normal.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "./fonts/Inter-latin-wght-italic.woff2",
+      style: "italic",
+      weight: "100 900",
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -77,8 +93,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`dark ${inter.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

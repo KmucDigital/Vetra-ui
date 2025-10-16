@@ -1,5 +1,7 @@
-# Vetra UI - Production Dockerfile for Coolify
-# Multi-stage build for optimized image size
+# Vetra UI - Production Dockerfile
+# Supports both static (:static) and dynamic (:dynamic) runtime modes
+
+ARG RUNTIME_MODE=static
 
 # Stage 1: Dependencies
 FROM node:20-alpine AS deps
@@ -7,10 +9,8 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-# Copy package files
 COPY package.json pnpm-lock.yaml* ./
 
-# Install pnpm and dependencies
 RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
 
@@ -18,36 +18,48 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy dependencies from deps stage
+ARG RUNTIME_MODE=static
+ENV NEXT_RUNTIME_MODE=:${RUNTIME_MODE}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Enable pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN if [ "${RUNTIME_MODE}" = "dynamic" ]; then pnpm build:dynamic; else pnpm build:static; fi
 
-# Build the application (static export)
-RUN pnpm build
-
-# Stage 3: Runner (nginx for static files)
-FROM nginx:alpine AS runner
+# Stage 3a: Static runner (nginx)
+FROM nginx:alpine AS static-runner
+RUN apk add --no-cache wget
 
 WORKDIR /usr/share/nginx/html
-
-# Remove default nginx static assets
 RUN rm -rf ./*
 
-# Copy static files from builder
 COPY --from=builder /app/out .
-
-# Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:80/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
 
-# Expose port
 EXPOSE 80
-
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+# Stage 3b: Dynamic runner (Next.js standalone)
+FROM node:20-alpine AS dynamic-runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+RUN apk add --no-cache curl
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=5 \
+  CMD curl -fsS http://localhost:3000/ || exit 1
+
+EXPOSE 3000
+CMD ["node", "server.js"]
+
+# Final stage selector
+ARG RUNTIME_MODE=static
+FROM ${RUNTIME_MODE}-runner

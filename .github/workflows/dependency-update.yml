@@ -1,0 +1,96 @@
+name: Dependency Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check for outdated dependencies
+        run: pnpm outdated --format json > outdated.json || true
+
+      - name: Audit for known vulnerabilities
+        run: pnpm audit --json > audit.json || true
+
+      - name: Generate summary
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const summary = [];
+
+          if (fs.existsSync('outdated.json')) {
+            const data = fs.readFileSync('outdated.json', 'utf8');
+            if (data.trim().length) {
+              try {
+                const outdated = JSON.parse(data);
+                const deps = Object.keys(outdated).length;
+                if (deps > 0) {
+                  summary.push(`### Dependencies requiring updates: **${deps}**`);
+                  for (const [name, info] of Object.entries(outdated)) {
+                    summary.push(`- ${name}: ${info.current} -> ${info.latest} (${info.type})`);
+                  }
+                } else {
+                  summary.push('### Dependencies requiring updates: **0**');
+                }
+              } catch (err) {
+                summary.push('### Unable to parse pnpm outdated output.');
+              }
+            } else {
+              summary.push('### Dependencies requiring updates: **0**');
+            }
+          }
+
+          if (fs.existsSync('audit.json')) {
+            const data = fs.readFileSync('audit.json', 'utf8');
+            if (data.trim().length) {
+              try {
+                const audit = JSON.parse(data);
+                if (typeof audit === 'object' && audit.metadata) {
+                  const { vulnerabilities } = audit.metadata;
+                  summary.push('');
+                  summary.push('### Vulnerability summary');
+                  for (const [severity, count] of Object.entries(vulnerabilities || {})) {
+                    summary.push(`- ${severity}: ${count}`);
+                  }
+                }
+              } catch (err) {
+                summary.push('');
+                summary.push('### Unable to parse pnpm audit output.');
+              }
+            }
+          }
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary.join('\n'));
+          EOF
+
+      - name: Upload audit artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-health-reports
+          path: |
+            outdated.json
+            audit.json

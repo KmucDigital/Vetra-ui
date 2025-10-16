@@ -1,10 +1,16 @@
+const runtimeInput = process.env.NEXT_RUNTIME_MODE
+  ? process.env.NEXT_RUNTIME_MODE.trim().toLowerCase()
+  : '';
+
+const isDynamicMode = runtimeInput === ':dynamic' || runtimeInput === 'dynamic';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: isDynamicMode ? 'standalone' : 'export',
   images: {
-    unoptimized: true,
+    unoptimized: !isDynamicMode,
   },
-  trailingSlash: true,
+  trailingSlash: !isDynamicMode,
 };
 
 export default nextConfig;

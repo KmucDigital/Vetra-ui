@@ -4,18 +4,38 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "pnpm build:static",
+    "build:static": "cross-env NEXT_RUNTIME_MODE=:static next build",
+    "build:dynamic": "cross-env NEXT_RUNTIME_MODE=:dynamic next build",
+    "start": "cross-env NEXT_RUNTIME_MODE=:dynamic node .next/standalone/server.js",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "export": "pnpm build:static"
   },
+  "keywords": [
+    "nextjs",
+    "landing-page",
+    "template",
+    "tailwindcss",
+    "typescript",
+    "glassmorphism"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kmucdigital/vetra-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/kmucdigital/vetra-ui/issues"
+  },
+  "homepage": "https://github.com/kmucdigital/vetra-ui#readme",
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.28",
+    "lucide-react": "^0.428.0",
     "next": "14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "framer-motion": "^11.3.28",
-    "lucide-react": "^0.428.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
@@ -23,6 +43,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
