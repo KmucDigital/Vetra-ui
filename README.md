@@ -11,7 +11,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 - Static export preview available locally via `pnpm export` -> `out/`
 
 ## Preview
-![Vetra UI preview](public/preview.png)
+![Vetra UI preview](public/image.png)
 
 ## Features
 - Next.js 14 App Router with streaming rendering
@@ -19,6 +19,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 - Tailwind CSS with custom dark glassmorphism theme
 - shadcn/ui primitives extended for marketing use-cases
 - Framer Motion powered section reveals and parallax effects
+- Self-hosted Inter variable font for offline-friendly builds
 - Responsive grid and typography scale with mobile-first design
 - SEO metadata, Open Graph tags, and sitemap/robots boilerplate
 - Dockerised nginx deployment and static export support
@@ -84,6 +85,7 @@ Dockerfile            Multi-stage Docker image
 nginx.conf            Production nginx setup
 tailwind.config.ts    Tailwind theme configuration
 tsconfig.json         TypeScript compiler options
+app/fonts/            Self-hosted Inter variable font assets
 ```
 
 ## Browser Support
@@ -136,6 +138,7 @@ Deploy the `.next/standalone` output to any Node 18+ host (PM2, Docker, serverle
 - **Static assets missing on export** - Confirm assets live under `public/` and are referenced with absolute `/asset.ext` paths.
 - **Styles not updating in dev** - Remove `.next/` and restart `pnpm dev` to clear Tailwind's cache.
 - **Runtime mode mismatch** - Double-check `NEXT_RUNTIME_MODE` matches your target (`:static` or `:dynamic`) before running `pnpm build`.
+- **Font fetch failures** - Fonts are bundled locally under `app/fonts`, so builds succeed without external requests. If you swap fonts, update the files and license notice there.
 
 ## FAQ
 **Can I use this template commercially?** - Yes, the MIT license permits commercial use without attribution (though a star is appreciated!).  
