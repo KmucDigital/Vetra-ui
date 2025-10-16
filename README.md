@@ -10,7 +10,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 - Static export preview available locally via `pnpm build` -> `out/`
 
 ## Preview
-![Vetra UI preview](public/image.png)
+[![Vetra UI preview](public/image.png)](https://vetra.kmuc.online)
 
 ## Features
 - Next.js 14 App Router with streaming rendering
