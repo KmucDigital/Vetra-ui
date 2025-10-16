@@ -4,7 +4,7 @@
 ARG RUNTIME_MODE=static
 
 # Stage 1: Dependencies
-FROM node:20-alpine AS deps
+FROM node:24-alpine AS deps
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
@@ -15,7 +15,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Builder
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 ARG RUNTIME_MODE=static
@@ -44,7 +44,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
 # Stage 3b: Dynamic runner (Next.js standalone)
-FROM node:20-alpine AS dynamic-runner
+FROM node:24-alpine AS dynamic-runner
 WORKDIR /app
 ENV NODE_ENV=production
 
