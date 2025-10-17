@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     "Free Template",
     "Component Library",
     "shadcn/ui",
-    "MIT License",
+    "iptpodate License",
   ],
   authors: [
     {

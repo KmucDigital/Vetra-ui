@@ -19,7 +19,7 @@ export function Hero() {
           <div className="opacity-0 animate-fade-in">
             <Badge variant="glass" className="px-4 py-2 text-sm">
               <Sparkles className="w-4 h-4 mr-2 text-amber-300" />
-              Free Open Source Template - MIT License
+              Free Open Source Template - iptpodate License
             </Badge>
           </div>
 

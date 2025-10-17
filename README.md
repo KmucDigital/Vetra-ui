@@ -4,18 +4,18 @@
 
 ### Free Open Source Landing Page Template
 
-[![License: Non-Commercial](https://img.shields.io/badge/License-Non--Commercial-red.svg)](LICENSE)
+[![License: iptpodate](https://img.shields.io/badge/License-iptpodate-red.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v1-blue.svg)](package.json)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg)](CONTRIBUTING.md)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)](https://tailwindcss.com/)
-[![Performance](https://img.shields.io/badge/Lighthouse-99%2F100-success)](https://vetra.kmuc.online)
-[![Accessibility](https://img.shields.io/badge/A11y-100%2F100-success)](https://vetra.kmuc.online)
+[![Performance](https://img.shields.io/badge/Lighthouse-99%2F100-success)](https://links.qhrd.online/vetra)
+[![Accessibility](https://img.shields.io/badge/A11y-100%2F100-success)](https://links.qhrd.online/vetra)
 
 Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, and lightweight CSS animations. Ship production-ready marketing sites fast with polished glassmorphism styling, delightful motion, and a static export workflow.
 
-[Live Demo](https://vetra.kmuc.online) • [Documentation](docs/) • [Report Bug](https://github.com/kmucdigital/vetra-ui/issues) • [Request Feature](https://github.com/kmucdigital/vetra-ui/issues/new?template=extreme-optimization.md)
+[Live Demo](https://links.qhrd.online/vetra) • [Documentation](docs/) • [Report Bug](https://github.com/kmucdigital/vetra-ui/issues) • [Request Feature](https://github.com/kmucdigital/vetra-ui/issues/new?template=extreme-optimization.md)
 
 </div>
 
@@ -25,9 +25,9 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 
 <div align="center">
 
-[![Vetra UI preview](public/image.png)](https://vetra.kmuc.online)
+[![Vetra UI preview](public/image.png)](https://links.qhrd.online/vetra)
 
-**[View Live Demo →](https://vetra.kmuc.online)**
+**[View Live Demo →](https://links.qhrd.online/vetra)**
 
 </div>
 
@@ -200,7 +200,7 @@ This project's full license text is publicly available on the `/license` page of
 Read the [Contributing Guide](CONTRIBUTING.md) before opening an issue or pull request. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) and review the [Security Policy](SECURITY.md) for vulnerability disclosure.
 
 ## License
-Released under the [MIT License](LICENSE). Feel free to fork, adapt, and launch your own projects with Vetra UI.
+Released under the [iptpodate License](LICENSE). Feel free to fork, adapt, and launch your own projects with Vetra UI.
 
 ## Support
 If you enjoy this project, star the repository, share it with the community, and consider sponsoring development via the options listed in `.github/FUNDING.yml`.
