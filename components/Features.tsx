@@ -67,9 +67,9 @@ export function Features() {
                 thickness={2}
                 style={{ borderRadius: 16 }}
               >
-                <Card className="p-6 md:p-8 h-full border-0 hover:border-purple-500/50 transition-transform duration-300 group hover:-translate-y-2">
+                <Card className="p-6 md:p-8 h-full border-0 md:hover:border-purple-500/50 md:transition-transform md:duration-300 group md:hover:-translate-y-2">
                   <div className="flex flex-col h-full">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 md:group-hover:scale-110 md:transition-transform md:duration-300">
                       <feature.icon className="w-6 h-6 text-purple-300" />
                     </div>
                     <h3 className="text-xl font-bold mb-3">{feature.title}</h3>

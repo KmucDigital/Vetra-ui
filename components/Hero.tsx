@@ -11,7 +11,7 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-32 motion-safe:scroll-mt-24">
       {/* Background Gradient - Enhanced */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px]" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[30px] md:blur-[120px] will-change-transform" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-8 py-16 md:py-24">
@@ -60,15 +60,15 @@ export function Hero() {
           </div>
 
           <div className="relative w-full max-w-6xl mt-16 opacity-0 animate-fade-in-up [animation-delay:320ms]">
-            {/* Ambient Glow Effects */}
-            <div className="absolute -top-20 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-pulse" />
-            <div className="absolute -bottom-20 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+            {/* Ambient Glow Effects - Reduced on Mobile */}
+            <div className="hidden md:block absolute -top-20 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-pulse will-change-transform" />
+            <div className="hidden md:block absolute -bottom-20 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-pulse will-change-transform" style={{ animationDelay: '1s' }} />
 
             <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-              <div className="relative group transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.01]">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative group md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-2 md:hover:scale-[1.01]">
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative rounded-2xl border border-zinc-800/80 bg-gradient-to-br from-zinc-900/90 via-zinc-900/50 to-zinc-950/90 p-1.5 backdrop-blur-2xl shadow-2xl">
+                <div className="relative rounded-2xl border border-zinc-800/80 bg-gradient-to-br from-zinc-900/90 via-zinc-900/50 to-zinc-950/90 p-1.5 backdrop-blur-sm md:backdrop-blur-2xl shadow-2xl">
                   <div className="rounded-xl bg-gradient-to-br from-zinc-900 via-black to-zinc-950 p-8">
                     <div className="flex items-center gap-2 mb-6 pb-4 border-b border-zinc-800/50">
                       <div className="flex gap-1.5">
@@ -112,10 +112,10 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="relative group transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.01]">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative group md:transition-transform md:duration-300 md:ease-out md:hover:-translate-y-2 md:hover:scale-[1.01]">
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative rounded-2xl border border-zinc-800/80 bg-gradient-to-br from-zinc-900/90 via-zinc-900/50 to-zinc-950/90 p-1.5 backdrop-blur-2xl shadow-2xl">
+                <div className="relative rounded-2xl border border-zinc-800/80 bg-gradient-to-br from-zinc-900/90 via-zinc-900/50 to-zinc-950/90 p-1.5 backdrop-blur-sm md:backdrop-blur-2xl shadow-2xl">
                   <div className="rounded-xl bg-gradient-to-br from-zinc-100 via-white to-zinc-50 p-8">
                     <div className="flex items-center gap-2 mb-6 pb-4 border-b border-zinc-200">
                       <div className="flex gap-1.5">

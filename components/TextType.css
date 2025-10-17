@@ -7,6 +7,18 @@
   margin-left: 0.25rem;
   display: inline-block;
   opacity: 1;
+  /* Pure CSS cursor blink animation - replaces GSAP for better mobile performance */
+  animation: cursor-blink var(--cursor-blink-duration, 0.5s) ease-in-out infinite alternate;
+  will-change: opacity;
+}
+
+@keyframes cursor-blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .text-type__cursor--hidden {

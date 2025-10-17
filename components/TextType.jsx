@@ -64,16 +64,12 @@ const TextType = ({
     return () => observer.disconnect();
   }, [startOnVisible]);
 
+  // Removed GSAP for cursor blinking - now using pure CSS animation
+  // This significantly reduces JavaScript overhead on mobile
   useEffect(() => {
     if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 });
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power2.inOut'
-      });
+      // Set CSS animation duration dynamically
+      cursorRef.current.style.setProperty('--cursor-blink-duration', `${cursorBlinkDuration}s`);
     }
   }, [showCursor, cursorBlinkDuration]);
 

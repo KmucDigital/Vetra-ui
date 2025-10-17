@@ -81,6 +81,43 @@
   .bg-gradient-radial {
     background-image: radial-gradient(var(--tw-gradient-stops));
   }
+
+  /* GPU Acceleration & Performance Optimizations */
+  .gpu-accelerate {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .gpu-layer {
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+  }
+
+  /* Optimize animations for mobile */
+  @media (max-width: 767px) {
+    .motion-reduce-mobile {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    /* Disable expensive animations on mobile */
+    .animate-pulse {
+      animation: none;
+    }
+  }
+
+  /* Respect user's reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 

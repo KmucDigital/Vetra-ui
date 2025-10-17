@@ -38,7 +38,11 @@ const config: Config = {
   		},
   		animation: {
   			'fade-in': 'fade-in 0.6s ease-out forwards',
-  			'fade-in-up': 'fade-in-up 0.8s ease-out forwards'
+  			'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+  			'fade-in-fast': 'fade-in 0.3s ease-out forwards',
+  		},
+  		transitionTimingFunction: {
+  			'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
   		},
   		colors: {
   			border: 'hsl(var(--border))',
@@ -89,10 +93,20 @@ const config: Config = {
   		},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
-  		}
+  		},
+  		// Mobile-optimized blur values
+  		blur: {
+  			'mobile-sm': '4px',
+  			'mobile-md': '8px',
+  			'mobile-lg': '12px',
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  // Performance optimizations
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };
 
 export default config;
