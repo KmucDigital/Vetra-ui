@@ -39,8 +39,8 @@ Thumbs.db
 # Documentation
 README.md
 CHANGELOG.md
-LICENSE
-*.md
+# LICENSE - needed for build check
+COMMIT.md
 
 # CI/CD
 .github
