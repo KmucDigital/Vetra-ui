@@ -200,7 +200,25 @@ This project's full license text is publicly available on the `/license` page of
 Read the [Contributing Guide](CONTRIBUTING.md) before opening an issue or pull request. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) and review the [Security Policy](SECURITY.md) for vulnerability disclosure.
 
 ## License
-Released under the [iptpodate License](LICENSE). Feel free to fork, adapt, and launch your own projects with Vetra UI.
+
+Released under the [iptpodate License](LICENSE). This project is for **non-commercial personal use only**.
+
+### 🔒 License Protection System
+
+Vetra UI includes a **multi-layered license protection system** that:
+- ✅ Verifies LICENSE file integrity before every build using SHA256 hash verification
+- ✅ Prevents builds with modified or missing LICENSE files
+- ✅ Enforces license checks in npm scripts, Next.js config, webpack, and Docker
+- ✅ Makes the full license text publicly available at `/license` route
+- ✅ Ensures license compliance is maintained throughout development and deployment
+
+**The LICENSE file is protected and cannot be modified.** Any attempt to change or remove it will cause the build to fail immediately.
+
+For detailed information about the license protection system, see [docs/LICENSE-PROTECTION.md](docs/LICENSE-PROTECTION.md).
+
+### Commercial Use
+
+If you want to use Vetra UI for commercial purposes, please contact us at https://kmuc.online to request a commercial license.
 
 ## Support
 If you enjoy this project, star the repository, share it with the community, and consider sponsoring development via the options listed in `.github/FUNDING.yml`.

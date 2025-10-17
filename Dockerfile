@@ -19,7 +19,17 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# CRITICAL: Verify LICENSE integrity before building
+# This prevents building Docker images with modified or missing LICENSE
+RUN echo "🔒 Verifying LICENSE integrity..." && \
+    node scripts/check-license.js || \
+    (echo "❌ LICENSE check failed - Docker build terminated" && exit 1)
+
 RUN pnpm build
+
+# Verify LICENSE is included in the build output
+RUN test -f LICENSE || (echo "❌ LICENSE file missing after build" && exit 1)
 
 # Stage 3: Static runner (nginx)
 FROM nginx:alpine AS runner
