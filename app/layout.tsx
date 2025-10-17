@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/lib/siteConfig";
+import CursorBackground from "@/components/backroundeffect";
 
 const inter = localFont({
   variable: "--font-sans",
@@ -94,7 +95,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans relative overflow-x-hidden">
+        <CursorBackground />
+        {children}
+      </body>
     </html>
   );
 }

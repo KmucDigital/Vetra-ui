@@ -97,7 +97,7 @@ export const siteConfig = {
           { label: "Features", href: "#features" },
           { label: "Documentation", href: "https://github.com/kmucdigital/vetra-ui" },
           { label: "GitHub Repository", href: "https://github.com/kmucdigital/vetra-ui" },
-          { label: "License (MIT)", href: "https://github.com/kmucdigital/vetra-ui/blob/main/LICENSE" },
+          { label: "License & Notice", href: "/license" },
         ],
       },
       {
@@ -136,6 +136,7 @@ export const siteConfig = {
 
   navigation: [
     { label: "Features", href: "#features" },
+    { label: "License", href: "/license" },
     { label: "GitHub", href: "https://github.com/kmucdigital/vetra-ui", external: true },
     { label: "Impressum", href: "https://kmuc.online/impressum", external: true },
     { label: "Datenschutz", href: "https://kmuc.online/datenschutz", external: true },

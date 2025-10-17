@@ -59,15 +59,14 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright & Disclaimer */}
-        <div className="pt-10 border-t border-zinc-800/50 space-y-4">
-          <p className="text-sm text-zinc-200 text-center sm:text-left">
-            Copyright (c) {currentYear} {siteConfig.name}. Created by Sebastian Lui. All Rights Reserved.
-          </p>
-          <p className="text-sm text-zinc-300 text-center sm:text-left leading-relaxed">
-            Dies ist ein Open-Source-Template (MIT License). Alle Inhalte dienen nur zur Demonstration.
-            Vetra UI ist kein kommerzielles Produkt. Die dargestellten Preise, Features und Firmennamen sind Beispiele.
-          </p>
+        {/* Copyright & License Link */}
+        <div className="pt-10 border-t border-zinc-800/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="text-sm text-zinc-200 text-center sm:text-left">Created by kmuc</p>
+          <div className="text-sm">
+            <Link href="/license" className="text-sm text-zinc-300 hover:text-white">
+              License & Notice
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

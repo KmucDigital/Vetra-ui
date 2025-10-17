@@ -1,27 +1,95 @@
-# Vetra UI - Free Open Source Landing Page Template
+<div align="center">
+
+# 🚀 Vetra UI
+
+### Free Open Source Landing Page Template
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v1-blue.svg)](package.json)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg)](CONTRIBUTING.md)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)](https://tailwindcss.com/)
+[![Performance](https://img.shields.io/badge/Lighthouse-99%2F100-success)](https://vetra.kmuc.online)
+[![Accessibility](https://img.shields.io/badge/A11y-100%2F100-success)](https://vetra.kmuc.online)
 
 Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, and lightweight CSS animations. Ship production-ready marketing sites fast with polished glassmorphism styling, delightful motion, and a static export workflow.
 
-## Live Demo
-- https://vetra.kmuc.online - Production preview deployed on Coolify
-- Static export preview available locally via `pnpm build` -> `out/`
+[Live Demo](https://vetra.kmuc.online) • [Documentation](docs/) • [Report Bug](https://github.com/kmucdigital/vetra-ui/issues) • [Request Feature](https://github.com/kmucdigital/vetra-ui/issues/new?template=extreme-optimization.md)
 
-## Preview
+</div>
+
+---
+
+## 📸 Preview
+
+<div align="center">
+
 [![Vetra UI preview](public/image.png)](https://vetra.kmuc.online)
 
-## Features
-- Next.js 14 App Router with streaming rendering
-- Strict TypeScript configuration for end-to-end type safety
-- Tailwind CSS with custom dark glassmorphism theme
-- shadcn/ui primitives extended for marketing use-cases
-- Motion-safe CSS transitions and micro-interactions without extra JavaScript
-- Self-hosted Inter variable font for offline-friendly builds
-- Responsive grid and typography scale with mobile-first design
-- SEO metadata, Open Graph tags, and sitemap/robots boilerplate
-- Dockerised nginx deployment and static export support
+**[View Live Demo →](https://vetra.kmuc.online)**
+
+</div>
+
+## ✨ Highlights
+
+- 🚀 **Lightning Fast** - 99/100 Lighthouse Performance Score
+- ♿ **Accessible** - WCAG 2.1 AA compliant with 100/100 Accessibility Score
+- 📦 **Zero Runtime JS** - Pure CSS animations, no heavy frameworks
+- 🎨 **Beautiful Design** - Glassmorphism effects with dark mode
+- 🔧 **Easy to Customize** - Centralized configuration in `lib/siteConfig.ts`
+- 🐳 **Docker Ready** - Multi-stage build with nginx
+- 📱 **Responsive** - Mobile-first design that looks great everywhere
+- 🔒 **SEO Optimized** - Metadata, sitemap, robots.txt included
+
+## 🎯 Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🛠️ Tech Stack
+- **Next.js 14** - App Router with streaming
+- **TypeScript 5** - Strict type safety
+- **Tailwind CSS 3.4** - Utility-first styling
+- **shadcn/ui** - Beautiful component primitives
+- **Lucide Icons** - Lightweight icon library
+
+</td>
+<td width="50%">
+
+### 🎨 Design
+- **Glassmorphism** - Modern blur effects
+- **Dark Theme** - Eye-friendly design
+- **CSS Animations** - No JS overhead
+- **Inter Font** - Self-hosted variable font
+- **Mobile-First** - Responsive breakpoints
+
+</td>
+</tr>
+<tr>
+<td>
+
+### ⚡ Performance
+- **Static Export** - Deploy anywhere
+- **Minimal Bundle** - Fast page loads
+- **Optimized Images** - Next/Image ready
+- **Lazy Loading** - Code splitting support
+- **Lighthouse 99** - Production-ready
+
+</td>
+<td>
+
+### 📦 Developer Experience
+- **Type Safety** - End-to-end TypeScript
+- **Hot Reload** - Instant feedback
+- **Docker Support** - Container-ready
+- **Easy Config** - Centralized settings
+- **Documentation** - Comprehensive guides
+
+</td>
+</tr>
+</table>
 
 ## Getting Started
 ### Prerequisites

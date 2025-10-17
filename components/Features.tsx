@@ -1,36 +1,40 @@
-import { Code2, Palette, Zap, Blocks, Sparkles, Github } from "lucide-react";
+import { Code2, Palette, Zap } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import ElectricBorder from "@/components/ElectricBorder";
 
 const features = [
   {
     icon: Code2,
     title: "Modern Tech Stack",
     description: "Built with Next.js 14, TypeScript, and Tailwind CSS for optimal performance and developer experience.",
+    items: [
+      "Next.js 14 App Router",
+      "TypeScript for type safety",
+      "Tailwind CSS styling",
+      "React Server Components"
+    ]
   },
   {
     icon: Palette,
     title: "Beautiful Design",
     description: "Stunning glassmorphism effects, smooth animations, and a carefully crafted dark theme.",
+    items: [
+      "Glassmorphism effects",
+      "Smooth CSS animations",
+      "Dark theme optimized",
+      "Responsive design"
+    ]
   },
   {
     icon: Zap,
     title: "Lightning Fast",
     description: "Optimized for performance with static export, minimal bundle size, and fast page loads.",
-  },
-  {
-    icon: Blocks,
-    title: "Fully Customizable",
-    description: "Easy to customize with centralized configuration and component-based architecture.",
-  },
-  {
-    icon: Sparkles,
-    title: "Production Ready",
-    description: "SEO optimized, fully responsive, and ready to deploy with Docker support.",
-  },
-  {
-    icon: Github,
-    title: "Open Source",
-    description: "MIT licensed, free to use, and available on GitHub for everyone.",
+    items: [
+      "Static site generation",
+      "Optimized bundle size",
+      "Fast page loads",
+      "SEO optimized"
+    ]
   },
 ];
 
@@ -56,15 +60,33 @@ export function Features() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div key={feature.title}>
-              <Card className="p-6 md:p-8 h-full hover:border-purple-500/50 transition-transform duration-300 group hover:-translate-y-2">
-                <div className="flex flex-col h-full">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon className="w-6 h-6 text-purple-300" />
+              <ElectricBorder
+                color="#7df9ff"
+                speed={1}
+                chaos={0.5}
+                thickness={2}
+                style={{ borderRadius: 16 }}
+              >
+                <Card className="p-6 md:p-8 h-full border-0 hover:border-purple-500/50 transition-transform duration-300 group hover:-translate-y-2">
+                  <div className="flex flex-col h-full">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <feature.icon className="w-6 h-6 text-purple-300" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                    <p className="text-zinc-200/80 leading-relaxed mb-4">{feature.description}</p>
+                    <div className="mt-auto pt-4 border-t border-zinc-800/50">
+                      <ul className="space-y-2">
+                        {feature.items.map((item, i) => (
+                          <li key={i} className="flex items-start text-sm text-zinc-300">
+                            <span className="text-cyan-400 mr-2">•</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                  <p className="text-zinc-200/80 leading-relaxed">{feature.description}</p>
-                </div>
-              </Card>
+                </Card>
+              </ElectricBorder>
             </div>
           ))}
         </div>

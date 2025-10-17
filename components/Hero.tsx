@@ -3,6 +3,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+// @ts-ignore - TextType is a JSX component
+import TextType from "@/components/TextType";
 
 export function Hero() {
   return (
@@ -22,8 +24,23 @@ export function Hero() {
           </div>
 
           <div className="space-y-6 max-w-5xl opacity-0 animate-fade-in-up [animation-delay:120ms]">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] md:leading-[1.1]">
-              {siteConfig.hero.headline}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1] md:leading-[1.1] relative">
+              <span className="invisible">Vetra UI is the new way to build landing pages.</span>
+              <span className="absolute inset-0">
+                {/* @ts-expect-error - TextType is a JSX component with optional props */}
+                <TextType
+                  text={[
+                    "Vetra UI is the new way to build landing pages.",
+                    "Beautiful components for modern web apps.",
+                    "Built with Tailwind CSS and React."
+                  ]}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  loop={true}
+                />
+              </span>
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-zinc-200 max-w-3xl mx-auto leading-relaxed">
               {siteConfig.hero.subheadline}
