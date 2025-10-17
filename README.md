@@ -6,11 +6,11 @@
 Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, and lightweight CSS animations. Ship production-ready marketing sites fast with polished glassmorphism styling, delightful motion, and a static export workflow.
 
 ## Live Demo
-- https://vetra.kmuc.online - Production preview deployed on Coolify
+- https://links.qhrd.online/vetra - Production preview deployed on Coolify
 - Static export preview available locally via `pnpm build` -> `out/`
 
 ## Preview
-[![Vetra UI preview](public/image.png)](https://vetra.kmuc.online)
+[![Vetra UI preview](public/image.png)](https://links.qhrd.online/vetra)
 
 ## Features
 - Next.js 14 App Router with streaming rendering

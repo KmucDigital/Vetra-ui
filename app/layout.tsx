@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Sebastian Lui",
-  metadataBase: new URL("https://vetra.kmuc.online"),
+  metadataBase: new URL("https://links.qhrd.online/vetra"),
   alternates: {
     canonical: "/",
   },

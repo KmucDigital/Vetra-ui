@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://vetra.kmuc.online";
+  const baseUrl = "https://links.qhrd.online/vetra";
 
   return [
     {
