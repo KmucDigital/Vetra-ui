@@ -4,7 +4,7 @@
 
 ### Free Open Source Landing Page Template
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: Non-Commercial](https://img.shields.io/badge/License-Non--Commercial-red.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v1-blue.svg)](package.json)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg)](CONTRIBUTING.md)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
@@ -183,7 +183,9 @@ If you need server-side rendering, update `next.config.mjs` to use `output: "sta
 - **Font fetch failures** - Fonts are bundled locally under `app/fonts`, so builds succeed without external requests. If you swap fonts, update the files and license notice there.
 
 ## FAQ
-**Can I use this template commercially?** - Yes, the MIT license permits commercial use without attribution (though a star is appreciated!).  
+**Can I use this template commercially?** - No. This project is released under a Non-Commercial Personal Use License (see `LICENSE`). If you want to use it commercially, please visit https://kmuc.online to request a commercial license.
+
+This project's full license text is publicly available on the `/license` page of the website and is bundled into production builds for transparency.
 **Does this support multi-page sites?** - Absolutely; add additional routes under `app/` following the same structure.  
 **Can I integrate a CMS?** - Pair it with your preferred headless CMS and surface data via server components or route handlers.
 

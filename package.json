@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "pnpm run check-license",
+    "check-license": "node ./scripts/check-license.js",
     "start": "serve -s out",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
