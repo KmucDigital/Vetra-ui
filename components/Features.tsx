@@ -1,94 +1,218 @@
-import { Code2, Palette, Zap } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import ElectricBorder from "@/components/ElectricBorder";
+"use client";
 
-const features = [
-  {
-    icon: Code2,
-    title: "Modern Tech Stack",
-    description: "Built with Next.js 14, TypeScript, and Tailwind CSS for optimal performance and developer experience.",
-    items: [
-      "Next.js 14 App Router",
-      "TypeScript for type safety",
-      "Tailwind CSS styling",
-      "React Server Components"
-    ]
-  },
-  {
-    icon: Palette,
-    title: "Beautiful Design",
-    description: "Stunning glassmorphism effects, smooth animations, and a carefully crafted dark theme.",
-    items: [
-      "Glassmorphism effects",
-      "Smooth CSS animations",
-      "Dark theme optimized",
-      "Responsive design"
-    ]
-  },
-  {
-    icon: Zap,
-    title: "Lightning Fast",
-    description: "Optimized for performance with static export, minimal bundle size, and fast page loads.",
-    items: [
-      "Static site generation",
-      "Optimized bundle size",
-      "Fast page loads",
-      "SEO optimized"
-    ]
-  },
+import type { ComponentType } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  BadgeDollarSign,
+  Bot,
+  BriefcaseBusiness,
+  CalendarClock,
+  ClipboardCheck,
+  LayoutDashboard,
+  LifeBuoy,
+  LineChart,
+  ListChecks,
+  Milestone,
+  PanelsTopLeft,
+  PlugZap,
+  Rocket,
+  Sparkles,
+  Workflow,
+} from "lucide-react";
+import { siteConfig } from "@/lib/siteConfig";
+import { AnimateShine } from "@/components/AnimateShine";
+import { GlassButton } from "@/components/GlassButton";
+import { cn } from "@/lib/utils";
+
+const personaCatalog = siteConfig.hero.personas;
+
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
+  layout: LayoutDashboard,
+  sparkles: Sparkles,
+  glass: PanelsTopLeft,
+  bot: Bot,
+  insight: LineChart,
+  pricing: BadgeDollarSign,
+  timeline: Milestone,
+  integration: PlugZap,
+  onboarding: ListChecks,
+  support: LifeBuoy,
+  briefcase: BriefcaseBusiness,
+  workflow: Workflow,
+  handoff: ClipboardCheck,
+  palette: Rocket,
+  calendar: CalendarClock,
+};
+
+const layoutClasses = [
+  "md:col-span-2 md:row-span-2",
+  "md:col-span-1",
+  "md:col-span-1",
+  "md:col-span-2",
+  "md:col-span-1",
 ];
 
 export function Features() {
+  const [persona, setPersona] = useState(siteConfig.hero.defaultPersona);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const personaConfig = useMemo(
+    () => personaCatalog.find((entry) => entry.id === persona) ?? personaCatalog[0],
+    [persona]
+  );
+
+  const items = useMemo(
+    () => siteConfig.featureSets[personaConfig.id] ?? [],
+    [personaConfig.id]
+  );
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<{ persona: string }>).detail;
+      if (!detail) return;
+      setPersona(detail.persona);
+    };
+
+    window.addEventListener("vetra:persona-change", handler);
+    return () => window.removeEventListener("vetra:persona-change", handler);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const rect = container.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+      setSpotlight({
+        x: Math.min(100, Math.max(0, x)),
+        y: Math.min(100, Math.max(0, y)),
+        opacity: 1,
+      });
+    };
+
+    const handlePointerLeave = () => {
+      setSpotlight((prev) => ({ ...prev, opacity: 0 }));
+    };
+
+    container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointerleave", handlePointerLeave);
+
+    return () => {
+      container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerleave", handlePointerLeave);
+    };
+  }, []);
+
   return (
-    <section id="features" className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-black" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
+    <section
+      id="features"
+      className="relative overflow-hidden border-t border-white/5 py-24 md:py-32"
+      aria-labelledby="features-heading"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(8,10,20,0.95),rgba(2,2,5,0.98))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(126,34,206,0.12),transparent_50%),radial-gradient(circle_at_85%_20%,rgba(47,109,255,0.2),transparent_55%)] opacity-70" />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-            Everything you need to build fast
-          </h2>
-          <p className="text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto leading-relaxed">
-            A complete landing page template with all the features you need to get started quickly.
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+            Persona aware components
           </p>
+          <h2
+            id="features-heading"
+            className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
+          >
+            {personaConfig.label} get{" "}
+            <AnimateShine
+              text="conversion-ready sections"
+              className="text-white"
+              speed={14}
+            />
+          </h2>
+          <p className="text-lg text-white/70">
+            Swap personas to preview how Vetra reshapes feature highlights,
+            proof points, and CTAs. Every block respects your brand accents and
+            launches with accessible defaults.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.02] p-2 backdrop-blur-xl">
+            {personaCatalog.map((entry) => (
+              <GlassButton
+                key={entry.id}
+                accent={entry.accent}
+                active={entry.id === personaConfig.id}
+                onClick={() => setPersona(entry.id)}
+              >
+                {entry.label}
+              </GlassButton>
+            ))}
+          </div>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {features.map((feature, index) => (
-            <div key={feature.title}>
-              <ElectricBorder
-                color="#7df9ff"
-                speed={1}
-                chaos={0.5}
-                thickness={2}
-                style={{ borderRadius: 16 }}
+        <div
+          ref={containerRef}
+          className="relative mt-16 grid auto-rows-[minmax(180px,1fr)] gap-5 md:grid-cols-3"
+        >
+          <div
+            className="pointer-events-none absolute inset-0 rounded-[32px] transition-opacity duration-700"
+            style={{
+              background: `radial-gradient(600px circle at ${spotlight.x}% ${spotlight.y}%, ${personaConfig.accent}33, transparent 65%)`,
+              opacity: spotlight.opacity,
+            }}
+          />
+
+          {items.map((feature, index) => {
+            const Icon = iconMap[feature.icon] ?? Sparkles;
+
+            return (
+              <div
+                key={feature.id}
+                className={cn(
+                  "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-2xl transition-transform duration-500 hover:-translate-y-1.5",
+                  layoutClasses[index] ?? "md:col-span-1"
+                )}
+                style={{
+                  boxShadow: `0 30px 80px ${personaConfig.accent}22`,
+                }}
               >
-                <Card className="p-6 md:p-8 h-full border-0 md:hover:border-purple-500/50 md:transition-transform md:duration-300 group md:hover:-translate-y-2">
-                  <div className="flex flex-col h-full">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 md:group-hover:scale-110 md:transition-transform md:duration-300">
-                      <feature.icon className="w-6 h-6 text-purple-300" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
+                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100" style={{
+                  background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
+                }} />
+                <div className="relative flex h-full flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">
+                      <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                    <p className="text-zinc-200/80 leading-relaxed mb-4">{feature.description}</p>
-                    <div className="mt-auto pt-4 border-t border-zinc-800/50">
-                      <ul className="space-y-2">
-                        {feature.items.map((item, i) => (
-                          <li key={i} className="flex items-start text-sm text-zinc-300">
-                            <span className="text-cyan-400 mr-2">•</span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {feature.badge && (
+                      <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                        {feature.badge}
+                      </span>
+                    )}
                   </div>
-                </Card>
-              </ElectricBorder>
-            </div>
-          ))}
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-white">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-white/70">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      Highlight
+                    </p>
+                    <p className="mt-2 text-sm text-white/80">
+                      <AnimateShine text={feature.highlight} speed={16} />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -4,8 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { GlassButton } from "@/components/GlassButton";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -34,7 +33,7 @@ export function Navigation() {
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-black/80 backdrop-blur-xl" role="banner">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-2xl" role="banner">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -65,13 +64,11 @@ export function Navigation() {
             ))}
 
             {/* CTA Button */}
-            <div className="flex items-center gap-3 ml-4">
-              <Link href="https://github.com/kmucdigital/vetra-ui">
-                <Button size="sm">
-                  Get Template
-                </Button>
-              </Link>
-            </div>
+            <Link href="https://github.com/kmucdigital/vetra-ui" className="ml-4">
+              <GlassButton className="px-5 py-2 text-sm" accent="#6B1F87">
+                Get Template
+              </GlassButton>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,13 +109,13 @@ export function Navigation() {
               ))}
 
               {/* Mobile CTA Button */}
-              <div className="flex flex-col gap-3 pt-4 border-t border-zinc-800/50">
-                <Link href="https://github.com/kmucdigital/vetra-ui">
-                  <Button className="w-full">
-                    Get Template
-                  </Button>
-                </Link>
-              </div>
+              <Link
+                href="https://github.com/kmucdigital/vetra-ui"
+                className="mt-6 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-center text-sm font-semibold text-white/80 transition hover:text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                Get Template
+              </Link>
             </div>
           </div>
         )}

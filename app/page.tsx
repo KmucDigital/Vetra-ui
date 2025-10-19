@@ -20,15 +20,21 @@ const Footer = dynamic(() => import("@/components/Footer").then(mod => ({ defaul
   loading: () => <div className="border-t border-zinc-800/50 bg-black py-16 md:py-20" />,
 });
 
+const AIChatLauncher = dynamic(
+  () => import("@/components/AIChatLauncher").then((mod) => ({ default: mod.AIChatLauncher })),
+  { ssr: false }
+);
+
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main id="main-content" className="relative min-h-screen">
       <Navigation />
       <Hero />
       <TrustedBy />
       <Features />
       <CTASection />
       <Footer />
+      <AIChatLauncher />
     </main>
   );
 }
