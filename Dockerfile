@@ -15,25 +15,19 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV PATH="/usr/local/bin:$PATH"
+ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npm install -g pnpm
 RUN npm run build
 
 # Runner
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-ARG HEALTHCHECK_ENABLED=true
-ENV HEALTHCHECK_ENABLED=${HEALTHCHECK_ENABLED}
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-RUN apk add --no-cache curl
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -43,14 +37,7 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-  CMD if [ "$HEALTHCHECK_ENABLED" = "true" ]; then \
-    curl -f http://localhost:3000/api/healthz || exit 1; \
-  else \
-    exit 0; \
-  fi
-
-CMD ["node", "server.js", "--hostname", "0.0.0.0"]
+CMD ["node", "server.js"]

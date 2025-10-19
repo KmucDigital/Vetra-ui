@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: vetra-app
+    container_name: vetra-ui-app
     restart: unless-stopped
     ports:
       - "3000:3000"
