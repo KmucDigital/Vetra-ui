@@ -24,7 +24,23 @@ import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
 import { cn } from "@/lib/utils";
 
-const personaCatalog = siteConfig.hero.personas;
+type PersonaId = keyof typeof siteConfig.featureSets;
+
+type FeatureEntry = {
+  id: string;
+  title: string;
+  description: string;
+  highlight: string;
+  icon: string;
+  badge?: string;
+};
+
+type FeatureCatalog = Record<PersonaId, FeatureEntry[]>;
+
+const personaCatalog = siteConfig.hero.personas as Array<
+  (typeof siteConfig.hero.personas)[number] & { id: PersonaId }
+>;
+const featureCatalog = siteConfig.featureSets as FeatureCatalog;
 
 const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   layout: LayoutDashboard,
@@ -52,26 +68,30 @@ const layoutClasses = [
   "md:col-span-1",
 ];
 
+const defaultPersona = siteConfig.hero.defaultPersona as PersonaId;
+
 export function Features() {
-  const [persona, setPersona] = useState(siteConfig.hero.defaultPersona);
+  const [persona, setPersona] = useState<PersonaId>(defaultPersona);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 });
 
-  const personaConfig = useMemo(
-    () => personaCatalog.find((entry) => entry.id === persona) ?? personaCatalog[0],
-    [persona]
-  );
+  const personaConfig = useMemo(() => {
+    const fallback = personaCatalog[0];
+    return personaCatalog.find((entry) => entry.id === persona) ?? fallback;
+  }, [persona]);
 
-  const items = useMemo(
-    () => siteConfig.featureSets[personaConfig.id] ?? [],
-    [personaConfig.id]
-  );
+  const items = useMemo<FeatureEntry[]>(() => {
+    const key = personaConfig.id;
+    return featureCatalog[key] ?? [];
+  }, [personaConfig.id]);
 
   useEffect(() => {
     const handler = (event: Event) => {
-      const detail = (event as CustomEvent<{ persona: string }>).detail;
-      if (!detail) return;
-      setPersona(detail.persona);
+      const detail = (event as CustomEvent<{ persona?: string }>).detail;
+      if (!detail?.persona) return;
+      if (detail.persona in featureCatalog) {
+        setPersona(detail.persona as PersonaId);
+      }
     };
 
     window.addEventListener("vetra:persona-change", handler);
@@ -164,7 +184,7 @@ export function Features() {
             }}
           />
 
-          {items.map((feature, index) => {
+          {items.map((feature: FeatureEntry, index: number) => {
             const Icon = iconMap[feature.icon] ?? Sparkles;
 
             return (

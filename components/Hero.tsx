@@ -11,11 +11,15 @@ import { LaunchCountdown } from "@/components/LaunchCountdown";
 // @ts-ignore - TextType is a JSX component
 import TextType from "@/components/TextType";
 
-const personas = siteConfig.hero.personas;
+type PersonaId = keyof typeof siteConfig.featureSets;
+type PersonaEntry = (typeof siteConfig.hero.personas)[number] & { id: PersonaId };
+
+const personas = siteConfig.hero.personas as PersonaEntry[];
+const Typewriter: any = TextType;
 
 export function Hero() {
-  const [activePersona, setActivePersona] = useState(
-    siteConfig.hero.defaultPersona
+  const [activePersona, setActivePersona] = useState<PersonaId>(
+    siteConfig.hero.defaultPersona as PersonaId
   );
 
   const persona = useMemo(() => {
@@ -76,7 +80,7 @@ export function Hero() {
               <span className="invisible">{persona.heroTitle}</span>
               <span className="sr-only">{persona.heroTitle}</span>
               <span className="pointer-events-none absolute inset-0">
-                <TextType
+                <Typewriter
                   key={persona.id}
                   text={[persona.heroTitle]}
                   typingSpeed={70}
