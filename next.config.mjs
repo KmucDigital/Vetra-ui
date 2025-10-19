@@ -24,7 +24,6 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Double-check license on server build
-      const { execSync } = require('child_process');
       try {
         execSync('node scripts/check-license.js', { stdio: 'pipe' });
       } catch (error) {

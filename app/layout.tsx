@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/lib/siteConfig";
-import CursorBackground from "@/components/backroundeffect";
+
+// Lazy load CursorBackground (only loads on desktop, includes Framer Motion)
+// This prevents loading 169KB Framer Motion bundle on mobile where it's not used
+const CursorBackground = dynamic(() => import("@/components/backroundeffect"), {
+  ssr: false, // Client-only component
+});
 
 const inter = localFont({
   variable: "--font-sans",
@@ -95,6 +101,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
+      <head>
+        {/* Resource Hints for Performance */}
+        <link rel="preconnect" href="https://github.com" />
+        <link rel="dns-prefetch" href="https://github.com" />
+        <link rel="preconnect" href="https://kmuc.online" />
+        <link rel="dns-prefetch" href="https://kmuc.online" />
+
+        {/* Theme Color */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="application-name" content="Vetra UI" />
+      </head>
       <body className="font-sans relative overflow-x-hidden">
         <CursorBackground />
         {children}

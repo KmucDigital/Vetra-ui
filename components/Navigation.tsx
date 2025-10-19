@@ -10,10 +10,41 @@ import { cn } from "@/lib/utils";
 export function Navigation() {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  // Close menu on Escape key
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-black/80 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-black/80 backdrop-blur-xl" role="banner">
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] bg-white text-black px-4 py-2 rounded-lg font-semibold transition-all"
+      >
+        Skip to main content
+      </a>
+
       <div className="container mx-auto max-w-7xl px-6 md:px-8">
-        <nav className="flex items-center justify-between h-16 md:h-20">
+        <nav className="flex items-center justify-between h-16 md:h-20" role="navigation" aria-label="Main navigation">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="text-xl md:text-2xl font-bold tracking-tight">
@@ -45,21 +76,29 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 hover:bg-zinc-800 rounded-lg transition-colors"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             )}
           </button>
         </nav>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-6 border-t border-zinc-800/50">
+          <div
+            id="mobile-menu"
+            className="md:hidden py-6 border-t border-zinc-800/50"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+          >
             <div className="flex flex-col space-y-4">
               {siteConfig.navigation.map((item) => (
                 <Link
