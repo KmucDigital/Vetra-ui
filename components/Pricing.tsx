@@ -38,7 +38,7 @@ export function Pricing() {
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {siteConfig.pricing.plans.map((plan, index) => (
+          {siteConfig.pricing.plans.map((plan) => (
             <div key={plan.name} className="transition-transform duration-300 hover:-translate-y-2">
               <Card
                 className={cn(

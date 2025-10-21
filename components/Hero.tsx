@@ -24,6 +24,9 @@ export function Hero() {
 
   const persona = useMemo(() => {
     const fallback = personas[0];
+    if (!fallback) {
+      throw new Error("No personas configured in siteConfig");
+    }
     return personas.find((entry) => entry.id === activePersona) ?? fallback;
   }, [activePersona]);
 
@@ -32,7 +35,7 @@ export function Hero() {
       detail: { persona: persona.id },
     });
     window.dispatchEvent(event);
-  }, [persona.id]);
+  }, [persona]);
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-28 md:pt-36">

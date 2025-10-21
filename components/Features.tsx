@@ -77,13 +77,16 @@ export function Features() {
 
   const personaConfig = useMemo(() => {
     const fallback = personaCatalog[0];
+    if (!fallback) {
+      throw new Error("No personas configured in siteConfig");
+    }
     return personaCatalog.find((entry) => entry.id === persona) ?? fallback;
   }, [persona]);
 
   const items = useMemo<FeatureEntry[]>(() => {
     const key = personaConfig.id;
     return featureCatalog[key] ?? [];
-  }, [personaConfig.id]);
+  }, [personaConfig]);
 
   useEffect(() => {
     const handler = (event: Event) => {

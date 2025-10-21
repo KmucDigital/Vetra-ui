@@ -4,8 +4,6 @@ import { MessageCircle, Twitter, Github, Globe } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="border-t border-zinc-800/50 bg-black">
       <div className="container mx-auto max-w-7xl px-6 md:px-8 py-16 md:py-20">

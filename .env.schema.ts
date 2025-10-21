@@ -8,7 +8,6 @@ import { z } from "zod";
  */
 
 // Helper schemas for common patterns
-const urlSchema = z.string().url().optional().or(z.literal(""));
 const colorSchema = z
   .string()
   .regex(/^\d+\s+\d+%\s+\d+%$/, "Must be in HSL format: '0 0% 98%'")
