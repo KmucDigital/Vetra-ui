@@ -1,6 +1,26 @@
+/**
+ * Site Configuration
+ * 
+ * This configuration can be customized via environment variables.
+ * See .env.example for all available options.
+ * 
+ * Environment variables take precedence over hardcoded values when set.
+ */
+
+// Helper to safely access environment variables
+const getEnvVar = (key: string, fallback: string): string => {
+  if (typeof process !== "undefined" && process.env?.[key]) {
+    return process.env[key] as string;
+  }
+  return fallback;
+};
+
 export const siteConfig = {
-  name: "Vetra UI",
-  description: "UI Library for Design Engineers",
+  name: getEnvVar("NEXT_PUBLIC_SITE_NAME", "Vetra UI"),
+  description: getEnvVar(
+    "NEXT_PUBLIC_SITE_DESCRIPTION",
+    "UI Library for Design Engineers"
+  ),
   longDescription:
     "Beautifully designed, animated components and templates built with Tailwind CSS, React, and modern CSS animations.",
 
@@ -10,11 +30,19 @@ export const siteConfig = {
       {
         id: "vetra",
         label: "Creators",
-        heroTitle: "Vetra UI is the new way to build landing pages.",
-        heroSubtitle:
-          "Craft immersive marketing sites in hours, not weeks. Vetra stitches together motion, glassmorphism, and systemized components for teams who care about polish.",
-        ctaText: "View on GitHub",
-        ctaLink: "https://github.com/kmucdigital/vetra-ui",
+        heroTitle: getEnvVar(
+          "NEXT_PUBLIC_HERO_HEADLINE",
+          "Vetra UI is the new way to build landing pages."
+        ),
+        heroSubtitle: getEnvVar(
+          "NEXT_PUBLIC_HERO_SUBHEADLINE",
+          "Craft immersive marketing sites in hours, not weeks. Vetra stitches together motion, glassmorphism, and systemized components for teams who care about polish."
+        ),
+        ctaText: getEnvVar("NEXT_PUBLIC_HERO_CTA_TEXT", "View on GitHub"),
+        ctaLink: getEnvVar(
+          "NEXT_PUBLIC_HERO_CTA_LINK",
+          "https://github.com/kmucdigital/vetra-ui"
+        ),
         accent: "#7E22CE",
         stats: [
           { label: "Components", value: 48, suffix: "+" },
@@ -56,8 +84,11 @@ export const siteConfig = {
   },
 
   launch: {
-    label: "Launching 20.11.2025",
-    targetDate: "2025-11-20T00:00:00+01:00",
+    label: getEnvVar("NEXT_PUBLIC_LAUNCH_LABEL", "Launching 20.11.2025"),
+    targetDate: getEnvVar(
+      "NEXT_PUBLIC_LAUNCH_DATE",
+      "2025-11-20T00:00:00+01:00"
+    ),
     milestones: [
       {
         status: "Done",
@@ -214,7 +245,10 @@ export const siteConfig = {
   },
 
   trustedBy: {
-    title: "TRUSTED BY TEAMS FROM AROUND THE WORLD",
+    title: getEnvVar(
+      "NEXT_PUBLIC_TRUSTED_BY_TITLE",
+      "TRUSTED BY TEAMS FROM AROUND THE WORLD"
+    ),
     companies: [
       { name: "Google", logo: "/images/google.svg" },
       { name: "Microsoft", logo: "/images/microsoft.svg" },
@@ -225,8 +259,14 @@ export const siteConfig = {
   },
 
   pricing: {
-    headline: "Simple pricing for everyone",
-    subheadline: "Choose the perfect plan for your needs",
+    headline: getEnvVar(
+      "NEXT_PUBLIC_PRICING_HEADLINE",
+      "Simple pricing for everyone"
+    ),
+    subheadline: getEnvVar(
+      "NEXT_PUBLIC_PRICING_SUBHEADLINE",
+      "Choose the perfect plan for your needs"
+    ),
     plans: [
       {
         name: "Basic",
@@ -293,12 +333,23 @@ export const siteConfig = {
   },
 
   cta: {
-    headline: "Ready to start your project?",
-    subheadline:
-      "Get started with Vetra UI today. Free, open source, and ready to customize.",
+    headline: getEnvVar(
+      "NEXT_PUBLIC_CTA_HEADLINE",
+      "Ready to start your project?"
+    ),
+    subheadline: getEnvVar(
+      "NEXT_PUBLIC_CTA_SUBHEADLINE",
+      "Get started with Vetra UI today. Free, open source, and ready to customize."
+    ),
     shimmer: "Launch with confidence. Iterate with speed.",
-    buttonText: "Download Template",
-    buttonHref: "https://github.com/kmucdigital/vetra-ui",
+    buttonText: getEnvVar(
+      "NEXT_PUBLIC_CTA_BUTTON_TEXT",
+      "Download Template"
+    ),
+    buttonHref: getEnvVar(
+      "NEXT_PUBLIC_CTA_BUTTON_HREF",
+      "https://github.com/kmucdigital/vetra-ui"
+    ),
     bullets: [
       { label: "100% Free", icon: "check" },
       { label: "iptpodate License", icon: "check" },
@@ -354,9 +405,30 @@ export const siteConfig = {
   navigation: [
     { label: "Features", href: "#features" },
     { label: "License", href: "/license" },
-    { label: "GitHub", href: "https://github.com/kmucdigital/vetra-ui", external: true },
-    { label: "Impressum", href: "https://kmuc.online/impressum", external: true },
-    { label: "Datenschutz", href: "https://kmuc.online/datenschutz", external: true },
+    {
+      label: "GitHub",
+      href: getEnvVar(
+        "NEXT_PUBLIC_GITHUB_URL",
+        "https://github.com/kmucdigital/vetra-ui"
+      ),
+      external: true,
+    },
+    {
+      label: "Impressum",
+      href: getEnvVar(
+        "NEXT_PUBLIC_IMPRESSUM_URL",
+        "https://kmuc.online/impressum"
+      ),
+      external: true,
+    },
+    {
+      label: "Datenschutz",
+      href: getEnvVar(
+        "NEXT_PUBLIC_DATENSCHUTZ_URL",
+        "https://kmuc.online/datenschutz"
+      ),
+      external: true,
+    },
   ],
 };
 
