@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "verify": "pnpm run check-license && pnpm run typecheck && pnpm run lint",
     "env:generate": "node scripts/generate-env.js",
-    "env:validate": "tsx scripts/validate-env.js"
+    "env:validate": "tsx scripts/validate-env.js",
+    "security:audit": "node scripts/security-audit.js"
   },
   "keywords": [
     "nextjs",
