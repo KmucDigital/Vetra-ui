@@ -168,6 +168,8 @@ export function Features() {
                 accent={entry.accent}
                 active={entry.id === personaConfig.id}
                 onClick={() => setPersona(entry.id)}
+                aria-label={`Switch to ${entry.label} persona`}
+                aria-pressed={entry.id === personaConfig.id}
               >
                 {entry.label}
               </GlassButton>

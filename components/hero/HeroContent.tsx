@@ -73,6 +73,8 @@ export const HeroContent = memo(function HeroContent({
             accent={entry.accent}
             active={activePersona.id === entry.id}
             onClick={() => handlePersonaClick(entry.id)}
+            aria-label={`Switch to ${entry.label} persona`}
+            aria-pressed={activePersona.id === entry.id}
           >
             {entry.label}
           </GlassButton>
