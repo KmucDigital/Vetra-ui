@@ -79,7 +79,11 @@
 
   body {
     @apply bg-black text-foreground antialiased;
-    background-image: radial-gradient(ellipse at bottom center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    background-image: radial-gradient(
+      ellipse at bottom center,
+      rgba(139, 92, 246, 0.15) 0%,
+      transparent 70%
+    );
   }
 
   html {
@@ -94,6 +98,26 @@
 
   .bg-gradient-radial {
     background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
+  /* Accessibility: Minimum touch target sizes (44x44px WCAG 2.1 AAA) */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .touch-target-large {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black;
+  }
+
+  .focus-ring-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500;
   }
 
   /* GPU Acceleration & Performance Optimizations */
@@ -133,8 +157,6 @@
     }
   }
 }
-
-
 
 @layer base {
   * {

@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface PricingToggleProps {
   isAnnual: boolean;
@@ -52,9 +52,11 @@ export function PricingToggle({ isAnnual, onToggle }: PricingToggleProps) {
 
         {/* Badge */}
         {isAnnual && (
-          <Badge variant="success" className="px-2 py-1 text-xs animate-fade-in">
-            <Sparkles className="w-3 h-3 mr-1" />
-            2 MONTHS FREE
+          <Badge
+            variant="success"
+            className="px-2 py-1 text-xs animate-fade-in"
+          >
+            <Sparkles className="w-3 h-3 mr-1" />2 MONTHS FREE
           </Badge>
         )}
       </div>

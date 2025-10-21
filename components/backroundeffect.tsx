@@ -51,7 +51,10 @@ export default function CursorBackground() {
   const halo = 700;
 
   return (
-    <div className="fixed inset-0 pointer-events-none hidden md:block" style={{ zIndex: 1 }}>
+    <div
+      className="fixed inset-0 pointer-events-none hidden md:block"
+      style={{ zIndex: 1 }}
+    >
       <motion.div
         className="absolute -translate-x-1/2 -translate-y-1/2 will-change-transform"
         style={{
@@ -59,7 +62,7 @@ export default function CursorBackground() {
           top: y,
           width: blob,
           height: blob,
-          filter: 'blur(100px)',
+          filter: "blur(100px)",
           opacity: 0.35,
         }}
       >
@@ -79,7 +82,7 @@ export default function CursorBackground() {
           top: y,
           width: halo,
           height: halo,
-          filter: 'blur(140px)',
+          filter: "blur(140px)",
           opacity: 0.25,
         }}
       >

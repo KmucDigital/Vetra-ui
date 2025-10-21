@@ -1,0 +1,36 @@
+# Prettier ignore file
+# Add files that should not be formatted by Prettier
+
+# Dependencies
+node_modules
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Generated files
+*.tsbuildinfo
+
+# Cache
+.cache
+.eslintcache
+
+# IDE
+.vscode
+.idea
+
+# Temporary files
+*.tmp
+.temp

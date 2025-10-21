@@ -19,9 +19,9 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
@@ -77,13 +77,16 @@ export function Features() {
 
   const personaConfig = useMemo(() => {
     const fallback = personaCatalog[0];
+    if (!fallback) {
+      throw new Error("No personas configured in siteConfig");
+    }
     return personaCatalog.find((entry) => entry.id === persona) ?? fallback;
   }, [persona]);
 
   const items = useMemo<FeatureEntry[]>(() => {
     const key = personaConfig.id;
     return featureCatalog[key] ?? [];
-  }, [personaConfig.id]);
+  }, [personaConfig]);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -165,6 +168,8 @@ export function Features() {
                 accent={entry.accent}
                 active={entry.id === personaConfig.id}
                 onClick={() => setPersona(entry.id)}
+                aria-label={`Switch to ${entry.label} persona`}
+                aria-pressed={entry.id === personaConfig.id}
               >
                 {entry.label}
               </GlassButton>
@@ -199,9 +204,12 @@ export function Features() {
                 }}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100" style={{
-                  background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
-                }} />
+                <div
+                  className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100"
+                  style={{
+                    background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
+                  }}
+                />
                 <div className="relative flex h-full flex-col gap-4">
                   <div className="flex items-center justify-between">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">

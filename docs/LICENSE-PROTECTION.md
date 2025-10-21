@@ -39,12 +39,12 @@ The license check runs at multiple stages:
 `next.config.mjs` runs the license check **synchronously** before any Next.js build:
 
 ```javascript
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 
 try {
-  execSync('node scripts/check-license.js', { stdio: 'inherit' });
+  execSync("node scripts/check-license.js", { stdio: "inherit" });
 } catch (error) {
-  console.error('BUILD BLOCKED: License check failed!');
+  console.error("BUILD BLOCKED: License check failed!");
   process.exit(1);
 }
 ```
@@ -56,10 +56,10 @@ Additional safeguard runs during webpack compilation:
 ```javascript
 webpack: (config, { isServer }) => {
   if (isServer) {
-    execSync('node scripts/check-license.js', { stdio: 'pipe' });
+    execSync("node scripts/check-license.js", { stdio: "pipe" });
   }
   return config;
-}
+};
 ```
 
 ### 5. **Docker Build Verification** ✅
@@ -77,6 +77,7 @@ RUN test -f LICENSE || (echo "❌ LICENSE file missing after build" && exit 1)
 ### 6. **Public License Page** ✅
 
 The license is publicly accessible at `/license` route:
+
 - Displays full license text
 - Served from the actual LICENSE file at build time
 - Embedded in production builds for transparency
@@ -97,17 +98,18 @@ The `scripts/check-license.js` script verifies:
 
 ## When License Check Runs
 
-| Command | Check Triggered | Blocks Execution |
-|---------|----------------|------------------|
-| `pnpm install` | ✅ Yes (postinstall) | ✅ Yes |
-| `pnpm dev` | ✅ Yes (pre-dev) | ✅ Yes |
-| `pnpm build` | ✅✅✅ Triple (prebuild + config + webpack) | ✅ Yes |
-| `pnpm start` | ✅ Yes (pre-start) | ✅ Yes |
-| `docker build` | ✅ Yes (Dockerfile RUN) | ✅ Yes |
+| Command        | Check Triggered                             | Blocks Execution |
+| -------------- | ------------------------------------------- | ---------------- |
+| `pnpm install` | ✅ Yes (postinstall)                        | ✅ Yes           |
+| `pnpm dev`     | ✅ Yes (pre-dev)                            | ✅ Yes           |
+| `pnpm build`   | ✅✅✅ Triple (prebuild + config + webpack) | ✅ Yes           |
+| `pnpm start`   | ✅ Yes (pre-start)                          | ✅ Yes           |
+| `docker build` | ✅ Yes (Dockerfile RUN)                     | ✅ Yes           |
 
 ## Error Messages
 
 ### LICENSE Missing
+
 ```
 ❌ FATAL ERROR: LICENSE file missing in project root.
    The LICENSE file is required and cannot be removed.
@@ -115,6 +117,7 @@ The `scripts/check-license.js` script verifies:
 ```
 
 ### LICENSE Modified
+
 ```
 ❌ FATAL ERROR: LICENSE file has been modified!
    Expected hash: b447d04fdd449c09f990b0fc6a8a1b1cd3a6db61f96d3c0221c9acace0dc9b28
@@ -127,6 +130,7 @@ The `scripts/check-license.js` script verifies:
 ```
 
 ### LICENSE Corrupted
+
 ```
 ❌ FATAL ERROR: LICENSE file is corrupted or invalid.
    Missing required terms: [list of missing terms]
@@ -142,6 +146,7 @@ pnpm run check-license
 ```
 
 Expected output on success:
+
 ```
 🔒 LICENSE INTEGRITY CHECK
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

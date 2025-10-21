@@ -38,7 +38,8 @@ export function AIChatLauncher() {
   }, []);
 
   const sessionLabel = useMemo(
-    () => (conversationId ? conversationId.split("-")[1] ?? "session" : "session"),
+    () =>
+      conversationId ? (conversationId.split("-")[1] ?? "session") : "session",
     [conversationId]
   );
 
@@ -102,8 +103,14 @@ export function AIChatLauncher() {
               onChange={(event) => setDraft(event.target.value)}
             />
             <div className="flex items-center justify-between text-xs text-white/50">
-              <span>Stubbed demo. Connect your AI backend to enable replies.</span>
-              <GlassButton accent="#7E22CE" className="px-4 py-2 text-xs" onClick={toggleOpen}>
+              <span>
+                Stubbed demo. Connect your AI backend to enable replies.
+              </span>
+              <GlassButton
+                accent="#7E22CE"
+                className="px-4 py-2 text-xs"
+                onClick={toggleOpen}
+              >
                 Close
               </GlassButton>
             </div>

@@ -49,6 +49,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 <td width="50%">
 
 ### 🛠️ Tech Stack
+
 - **Next.js 14** - App Router with streaming
 - **TypeScript 5** - Strict type safety
 - **Tailwind CSS 3.4** - Utility-first styling
@@ -59,6 +60,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 <td width="50%">
 
 ### 🎨 Design
+
 - **Glassmorphism** - Modern blur effects
 - **Dark Theme** - Eye-friendly design
 - **CSS Animations** - No JS overhead
@@ -71,6 +73,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 <td>
 
 ### ⚡ Performance
+
 - **Static Export** - Deploy anywhere
 - **Minimal Bundle** - Fast page loads
 - **Optimized Images** - Next/Image ready
@@ -81,6 +84,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 <td>
 
 ### 📦 Developer Experience
+
 - **Type Safety** - End-to-end TypeScript
 - **Hot Reload** - Instant feedback
 - **Docker Support** - Container-ready
@@ -94,6 +98,7 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 ## Getting Started
 
 ### Prerequisites
+
 - **Node.js 18+** – required for Next.js 14 and native fetch
 - **pnpm** – fast, disk-space-efficient package manager  
   Install once: `npm install -g pnpm`
@@ -103,20 +108,25 @@ Modern landing page template built with Next.js 14, TypeScript, Tailwind CSS, an
 ### Quick Start (recommended)
 
 #### 1. Using the Kmuc Dev CLI (fastest)
+
 The CLI scaffolds the repo, installs dependencies and wires up environment variables in under a minute.
 
 ### Installation via pnpm
+
 Install the kmuc dev cli:
-   ```bash
-   pnpm i kmuc-dev-cli
-   ```
+
+```bash
+pnpm i kmuc-dev-cli
+```
 
 1. Initialize the project:
+
    ```bash
    kmuc init
    ```
 
 2. Publish the project localy
+
    ```bash
    kmuc publish
    ```
@@ -124,6 +134,7 @@ Install the kmuc dev cli:
 3. Open http://localhost:3000 in your browser.
 
 ### Useful Scripts
+
 - `pnpm dev` - Run the development server with hot reload
 - `pnpm build` - Produce the static production build into `out/`
 - `pnpm start` - Serve the generated `out/` directory locally via `serve` (run `pnpm build` first)
@@ -131,6 +142,7 @@ Install the kmuc dev cli:
 - `pnpm typecheck` - TypeScript program diagnostics
 
 ## Project Structure
+
 ```
 app/
   layout.tsx          Root layout with metadata and theme setup
@@ -158,40 +170,50 @@ app/fonts/            Self-hosted Inter variable font assets
 ```
 
 ## Browser Support
-| Browser | Support |
-| --- | --- |
-| Chrome | Yes (last 2 versions) |
+
+| Browser | Support               |
+| ------- | --------------------- |
+| Chrome  | Yes (last 2 versions) |
 | Firefox | Yes (last 2 versions) |
-| Safari | Yes (last 2 versions) |
-| Edge | Yes (last 2 versions) |
+| Safari  | Yes (last 2 versions) |
+| Edge    | Yes (last 2 versions) |
 
 ## Performance Metrics
-| Metric | Desktop | Mobile | Notes |
-| --- | --- | --- | --- |
-| Performance | 99 | 95 | Lighthouse scores on demo deployment |
-| Accessibility | 100 | 100 | Semantic HTML with focus management |
-| Best Practices | 100 | 100 | HTTPS, image optimisation, no console errors |
-| SEO | 100 | 100 | Metadata, robots, structured data ready |
 
-*Run `pnpm build` and audit the `out/` folder with Lighthouse to verify your deployment.*
+| Metric         | Desktop | Mobile | Notes                                        |
+| -------------- | ------- | ------ | -------------------------------------------- |
+| Performance    | 99      | 95     | Lighthouse scores on demo deployment         |
+| Accessibility  | 100     | 100    | Semantic HTML with focus management          |
+| Best Practices | 100     | 100    | HTTPS, image optimisation, no console errors |
+| SEO            | 100     | 100    | Metadata, robots, structured data ready      |
+
+_Run `pnpm build` and audit the `out/` folder with Lighthouse to verify your deployment._
 
 ## Deployment
+
 ### Static Export (CDN / Static Hosts)
+
 ```bash
 pnpm build
 ```
+
 The build artefacts live in the `out/` directory and can be served by any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages, S3 + CloudFront, nginx, Apache, etc.).
 
 ### Docker (Static by Default)
+
 ```bash
 docker build -t vetra-ui:static .
 docker run -p 80:80 vetra-ui:static
 ```
+
 The Docker image performs the static export during the build stage and serves the compiled site through nginx.
 
 ### Switching to SSR Later
+
 If you need server-side rendering, update `next.config.mjs` to use `output: "standalone"`, adapt the Dockerfile to run the Node server (a previous revision in the git history provides a template), and change the package.json `start` script back to `next start`. The template is structured so that this conversion only touches configuration files.
+
 ## Troubleshooting
+
 - **`pnpm install` fails** - Ensure Node.js 18+ is installed and delete `pnpm-lock.yaml` only if instructed.
 - **Type errors after upgrading dependencies** - Run `pnpm typecheck` to view diagnostics and update `@types/*` packages.
 - **Static assets missing on export** - Confirm assets live under `public/` and are referenced with absolute `/asset.ext` paths.
@@ -199,6 +221,7 @@ If you need server-side rendering, update `next.config.mjs` to use `output: "sta
 - **Font fetch failures** - Fonts are bundled locally under `app/fonts`, so builds succeed without external requests. If you swap fonts, update the files and license notice there.
 
 ## FAQ
+
 **Can I use this template commercially?** - No. This project is released under a Non-Commercial Personal Use License (see `LICENSE`). If you want to use it commercially, please visit https://kmuc.online to request a commercial license.
 
 This project's full license text is publicly available on the `/license` page of the website and is bundled into production builds for transparency.
@@ -206,6 +229,7 @@ This project's full license text is publicly available on the `/license` page of
 **Can I integrate a CMS?** - Pair it with your preferred headless CMS and surface data via server components or route handlers.
 
 ## Technologies
+
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -213,6 +237,7 @@ This project's full license text is publicly available on the `/license` page of
 - [Lucide Icons](https://lucide.dev/)
 
 ## Contributing
+
 Read the [Contributing Guide](CONTRIBUTING.md) before opening an issue or pull request. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) and review the [Security Policy](SECURITY.md) for vulnerability disclosure.
 
 ## License
@@ -222,6 +247,7 @@ Released under the [iptpodate License](LICENSE). This project is for **non-comme
 ### 🔒 License Protection System
 
 Vetra UI includes a **multi-layered license protection system** that:
+
 - ✅ Verifies LICENSE file integrity before every build using SHA256 hash verification
 - ✅ Prevents builds with modified or missing LICENSE files
 - ✅ Enforces license checks in npm scripts, Next.js config, webpack, and Docker
@@ -237,4 +263,5 @@ For detailed information about the license protection system, see [docs/LICENSE-
 If you want to use Vetra UI for commercial purposes, please contact us at https://kmuc.online to request a commercial license.
 
 ## Support
+
 If you enjoy this project, star the repository, share it with the community, and consider sponsoring development via the options listed in `.github/FUNDING.yml`.

@@ -8,7 +8,8 @@
   display: inline-block;
   opacity: 1;
   /* Pure CSS cursor blink animation - replaces GSAP for better mobile performance */
-  animation: cursor-blink var(--cursor-blink-duration, 0.5s) ease-in-out infinite alternate;
+  animation: cursor-blink var(--cursor-blink-duration, 0.5s) ease-in-out
+    infinite alternate;
   will-change: opacity;
 }
 
