@@ -51,7 +51,11 @@
 /* Simple gradient border for mobile - much faster than SVG filters */
 .eb-stroke-simple {
   border: none;
-  background: linear-gradient(135deg, var(--electric-border-color), oklch(from var(--electric-border-color) calc(l * 1.2) c h));
+  background: linear-gradient(
+    135deg,
+    var(--electric-border-color),
+    oklch(from var(--electric-border-color) calc(l * 1.2) c h)
+  );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -64,7 +68,8 @@
 }
 
 .eb-glow-1 {
-  border: var(--eb-border-width) solid oklch(from var(--electric-border-color) l c h / 0.6);
+  border: var(--eb-border-width) solid
+    oklch(from var(--electric-border-color) l c h / 0.6);
   opacity: 0.5;
   filter: blur(calc(0.5px + (var(--eb-border-width) * 0.25)));
 }
@@ -80,5 +85,10 @@
   transform: scale(1.08);
   filter: blur(32px);
   opacity: 0.3;
-  background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));
+  background: linear-gradient(
+    -30deg,
+    var(--electric-light-color),
+    transparent,
+    var(--electric-border-color)
+  );
 }

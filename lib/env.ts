@@ -1,9 +1,9 @@
 /**
  * Environment Configuration Module
- * 
+ *
  * This module provides type-safe access to validated environment variables.
  * All ENV variables are validated against the Zod schema at build time.
- * 
+ *
  * Usage:
  * import { env } from '@/lib/env'
  * console.log(env.NEXT_PUBLIC_SITE_NAME)

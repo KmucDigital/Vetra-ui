@@ -1,21 +1,24 @@
 /**
  * HeroContent Component
- * 
+ *
  * Main content area of the hero section including title, subtitle, and CTA.
  * Memoized for performance with useCallback for event handlers.
  */
 
 "use client";
 
-import { memo, useCallback } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { GlassButton } from "@/components/GlassButton";
-import { AnimateShine } from "@/components/AnimateShine";
-// @ts-ignore - TextType is a JSX component
-import TextType from "@/components/TextType";
+import { memo, useCallback } from "react";
 
+import { AnimateShine } from "@/components/AnimateShine";
+import { GlassButton } from "@/components/GlassButton";
+// TextType is a JSX component without TypeScript types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+import TextType from "@/components/TextType";
+import { Badge } from "@/components/ui/badge";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Typewriter: any = TextType;
 
 type PersonaEntry = {

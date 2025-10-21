@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+import Link from "next/link";
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = React.useState(false);

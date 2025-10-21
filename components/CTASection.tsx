@@ -1,11 +1,11 @@
 "use client";
 
 import { memo } from "react";
-import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+import Link from "next/link";
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const CTASection = memo(function CTASection() {
   return (
@@ -40,7 +40,11 @@ export const CTASection = memo(function CTASection() {
             </div>
 
             <Link href={siteConfig.cta.buttonHref} className="group">
-              <GlassButton active accent="#6B1F87" className="gap-3 px-7 py-3 text-base">
+              <GlassButton
+                active
+                accent="#6B1F87"
+                className="gap-3 px-7 py-3 text-base"
+              >
                 {siteConfig.cta.buttonText}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </GlassButton>
@@ -63,4 +67,3 @@ export const CTASection = memo(function CTASection() {
     </section>
   );
 });
-

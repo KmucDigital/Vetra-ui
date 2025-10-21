@@ -3,7 +3,7 @@
 import { memo } from "react";
 import * as React from "react";
 import { Check } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+import { PricingToggle } from "@/components/PricingToggle";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PricingToggle } from "@/components/PricingToggle";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 
 export const Pricing = memo(function Pricing() {
@@ -40,7 +40,10 @@ export const Pricing = memo(function Pricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {siteConfig.pricing.plans.map((plan) => (
-            <div key={plan.name} className="transition-transform duration-300 hover:-translate-y-2">
+            <div
+              key={plan.name}
+              className="transition-transform duration-300 hover:-translate-y-2"
+            >
               <Card
                 className={cn(
                   "relative h-full flex flex-col transition-all duration-300 border-zinc-800/50 bg-zinc-900/50 backdrop-blur-sm hover:border-zinc-700 hover:shadow-2xl",
@@ -57,13 +60,19 @@ export const Pricing = memo(function Pricing() {
                 )}
 
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                  <CardDescription className="text-zinc-500">{plan.description}</CardDescription>
+                  <CardTitle className="text-2xl font-bold">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="text-zinc-500">
+                    {plan.description}
+                  </CardDescription>
                   <div className="mt-6">
                     <span className="text-4xl md:text-5xl font-bold">
                       ${isAnnual ? Math.floor(plan.price * 10) : plan.price}
                     </span>
-                    <span className="text-zinc-500">/{isAnnual ? 'year' : 'month'}</span>
+                    <span className="text-zinc-500">
+                      /{isAnnual ? "year" : "month"}
+                    </span>
                     {isAnnual && (
                       <div className="text-sm text-zinc-500 mt-2">
                         ${plan.price}/month billed annually
@@ -76,10 +85,14 @@ export const Pricing = memo(function Pricing() {
                   <ul className="space-y-4">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
-                        <Check className={cn(
-                          "h-5 w-5 shrink-0 mt-0.5",
-                          plan.highlighted ? "text-purple-300" : "text-zinc-300"
-                        )} />
+                        <Check
+                          className={cn(
+                            "h-5 w-5 shrink-0 mt-0.5",
+                            plan.highlighted
+                              ? "text-purple-300"
+                              : "text-zinc-300"
+                          )}
+                        />
                         <span className="text-sm text-zinc-200/90 leading-relaxed">
                           {feature}
                         </span>

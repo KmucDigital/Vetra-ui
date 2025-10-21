@@ -79,7 +79,11 @@
 
   body {
     @apply bg-black text-foreground antialiased;
-    background-image: radial-gradient(ellipse at bottom center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    background-image: radial-gradient(
+      ellipse at bottom center,
+      rgba(139, 92, 246, 0.15) 0%,
+      transparent 70%
+    );
   }
 
   html {
@@ -153,8 +157,6 @@
     }
   }
 }
-
-
 
 @layer base {
   * {

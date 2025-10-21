@@ -1,6 +1,6 @@
 /**
  * BrowserMockup Component
- * 
+ *
  * Displays dark and light browser mockups showcasing the template.
  * Memoized for performance.
  */

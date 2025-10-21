@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { siteConfig } from "@/lib/siteConfig";
-import { LaunchCountdown } from "@/components/LaunchCountdown";
 import { AnimatedGradients } from "@/components/hero/AnimatedGradients";
-import { HeroContent } from "@/components/hero/HeroContent";
 import { BrowserMockup } from "@/components/hero/BrowserMockup";
+import { HeroContent } from "@/components/hero/HeroContent";
+import { LaunchCountdown } from "@/components/LaunchCountdown";
+import { siteConfig } from "@/lib/siteConfig";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
 type PersonaEntry = (typeof siteConfig.hero.personas)[number] & {

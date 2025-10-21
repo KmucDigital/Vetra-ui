@@ -1,6 +1,6 @@
 /**
  * Zod Schemas for Site Configuration
- * 
+ *
  * These schemas provide runtime validation and type inference
  * for all configuration objects used throughout the site.
  */

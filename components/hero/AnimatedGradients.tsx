@@ -1,6 +1,6 @@
 /**
  * AnimatedGradients Component
- * 
+ *
  * Renders the animated background gradients for the hero section.
  * Memoized for performance.
  */
