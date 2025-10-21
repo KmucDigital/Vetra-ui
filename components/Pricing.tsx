@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import * as React from "react";
 import { Check } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
@@ -15,7 +16,7 @@ import {
 import { PricingToggle } from "@/components/PricingToggle";
 import { cn } from "@/lib/utils";
 
-export function Pricing() {
+export const Pricing = memo(function Pricing() {
   const [isAnnual, setIsAnnual] = React.useState(true);
 
   return (
@@ -107,4 +108,4 @@ export function Pricing() {
       </div>
     </section>
   );
-}
+});

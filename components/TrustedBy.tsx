@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { siteConfig } from "@/lib/siteConfig";
 
 function getInitials(name: string) {
@@ -9,7 +10,7 @@ function getInitials(name: string) {
     .toUpperCase();
 }
 
-export function TrustedBy() {
+export const TrustedBy = memo(function TrustedBy() {
   // Use companies from siteConfig so logos from `public/` are honored
   const companies = siteConfig.trustedBy?.companies ?? [];
 
@@ -42,4 +43,4 @@ export function TrustedBy() {
       </div>
     </section>
   );
-}
+});

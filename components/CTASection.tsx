@@ -1,12 +1,13 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { siteConfig } from "@/lib/siteConfig";
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
 
-export function CTASection() {
+export const CTASection = memo(function CTASection() {
   return (
     <section
       className="relative overflow-hidden border-t border-white/5 py-24 md:py-32"
@@ -61,5 +62,5 @@ export function CTASection() {
       </div>
     </section>
   );
-}
+});
 
