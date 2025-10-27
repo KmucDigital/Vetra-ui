@@ -1,5 +1,5 @@
 # Next.js Dockerfile - Multi-stage Build
-FROM node:20-alpine AS base
+FROM node:25-alpine AS base
 
 # Dependencies installieren
 FROM base AS deps
