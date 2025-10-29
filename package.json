@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "pnpm run check-license && next dev",
     "build": "next build",
+    "check-license": "node scripts/check-license.js",
     "prebuild": "node scripts/check-license.js",
     "start": "pnpm run check-license && serve -s out",
     "lint": "next lint",
