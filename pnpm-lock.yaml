@@ -19,7 +19,7 @@ importers:
         version: 12.23.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       kmuc-dev-cli:
         specifier: ^2.1.1
-        version: 2.1.1(@types/node@20.19.21)
+        version: 2.2.1(@types/node@20.19.21)
       lucide-react:
         specifier: ^0.428.0
         version: 0.428.0(react@18.3.1)
@@ -1382,8 +1382,8 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kmuc-dev-cli@2.1.1:
-    resolution: {integrity: sha512-XX7Ek5HGyxh0G4TxTg0zUqO5VzRRpjlNMwpAhhb6SwJamlRQEL0VcWceqqDkqLNikedua8MU0slsCXKoT/8eXA==}
+  kmuc-dev-cli@2.2.1:
+    resolution: {integrity: sha512-dj1QFP1QRPY13ArodWp2bPfgOmFu3UJvqqopzGad1sZvSsCK2vmEuDHpPW1v6muLYf3zVJJuaboGMcZWDcfXRg==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
     hasBin: true
 
@@ -1450,12 +1450,20 @@ packages:
     resolution: {integrity: sha512-BHJ/EKruNIqJf/QahvxwQZXKygOQ256myeN/Ew+THcAa5q+PjyTTMMeNQC4DZw5AwfvelsUrA6B67NKMqXDbzQ==}
     engines: {node: '>= 0.6'}
 
+  mime-db@1.52.0:
+    resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+
   mime-db@1.54.0:
     resolution: {integrity: sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==}
     engines: {node: '>= 0.6'}
 
   mime-types@2.1.18:
     resolution: {integrity: sha512-lc/aahn+t4/SWV/qcmumYjymLsWfN3ELhpmVuUFjgsORruuZPVSwAQryq+HHGvO/SI2KVX26bx+En+zhM8g8hQ==}
+    engines: {node: '>= 0.6'}
+
+  mime-types@2.1.35:
+    resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
 
   mimic-fn@2.1.0:
@@ -3257,7 +3265,7 @@ snapshots:
       combined-stream: 1.0.8
       es-set-tostringtag: 2.1.0
       hasown: 2.0.2
-      mime-types: 2.1.18
+      mime-types: 2.1.35
 
   fraction.js@4.3.7: {}
 
@@ -3648,7 +3656,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kmuc-dev-cli@2.1.1(@types/node@20.19.21):
+  kmuc-dev-cli@2.2.1(@types/node@20.19.21):
     dependencies:
       adm-zip: 0.5.16
       chalk: 4.1.2
@@ -3711,11 +3719,17 @@ snapshots:
 
   mime-db@1.33.0: {}
 
+  mime-db@1.52.0: {}
+
   mime-db@1.54.0: {}
 
   mime-types@2.1.18:
     dependencies:
       mime-db: 1.33.0
+
+  mime-types@2.1.35:
+    dependencies:
+      mime-db: 1.52.0
 
   mimic-fn@2.1.0: {}
 
