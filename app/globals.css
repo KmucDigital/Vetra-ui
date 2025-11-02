@@ -113,6 +113,35 @@
       transform: translateY(0);
     }
   }
+
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px currentColor);
+    }
+    50% {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 20px currentColor);
+    }
+  }
 }
 
 @layer base {
@@ -123,10 +152,25 @@
   body {
     @apply bg-black text-foreground antialiased;
     background-image: radial-gradient(ellipse at bottom center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Light mode styles */
+  .light body {
+    @apply bg-white text-gray-900;
+    background-image: radial-gradient(ellipse at bottom center, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
   }
 
   html {
     @apply scroll-smooth;
+  }
+
+  /* Smooth theme transitions */
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
   }
 }
 
@@ -207,6 +251,35 @@
   .backdrop-blur-smooth {
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-effect-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Gradient animations */
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient 8s linear infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
   }
 
   /* Optimize animations for mobile */

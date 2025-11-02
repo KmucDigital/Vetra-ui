@@ -101,7 +101,7 @@ export function Hero() {
             <GlassButton
               accent={persona!.accent}
               active
-              className="gap-3 px-7 py-3 text-base font-semibold md:text-lg"
+              className="gap-3 px-7 py-3 text-base font-semibold md:text-lg touch-manipulation"
             >
               {persona!.ctaText}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
