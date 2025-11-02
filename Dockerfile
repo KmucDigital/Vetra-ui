@@ -1,27 +1,37 @@
-# Next.js Dockerfile - Multi-stage Build
+# Next.js Dockerfile - Multi-stage Build with pnpm
 FROM node:20-alpine AS base
 
-# Dependencies installieren
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Dependencies stage
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci
+# Copy package files and pnpm lock
+COPY package.json pnpm-lock.yaml ./
 
-# Builder
+# Install dependencies using pnpm with frozen lockfile
+RUN pnpm install --frozen-lockfile --prod=false
+
+# Builder stage
 FROM base AS builder
 WORKDIR /app
+
+# Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
+
+# Copy all source files
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PATH="/usr/local/bin:$PATH"
+ENV NODE_ENV=production
 
-RUN npm install -g pnpm
-RUN npm run build
+# Build the application using pnpm
+RUN pnpm run build
 
-# Runner
+# Runner stage
 FROM base AS runner
 WORKDIR /app
 
@@ -31,10 +41,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ARG HEALTHCHECK_ENABLED=true
 ENV HEALTHCHECK_ENABLED=${HEALTHCHECK_ENABLED}
 
+# Create nextjs user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 RUN apk add --no-cache curl
 
+# Copy built application
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
