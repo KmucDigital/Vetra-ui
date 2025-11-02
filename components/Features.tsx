@@ -23,6 +23,7 @@ import { siteConfig } from "@/lib/siteConfig";
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { use3DTilt } from "@/hooks/use3DTilt";
 import { cn } from "@/lib/utils";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
@@ -70,6 +71,83 @@ const layoutClasses = [
 ];
 
 const defaultPersona = siteConfig.hero.defaultPersona as PersonaId;
+
+interface FeatureCardProps {
+  feature: FeatureEntry;
+  accent: string;
+  index: number;
+  layoutClass: string;
+}
+
+function FeatureCard({ feature, accent, index, layoutClass }: FeatureCardProps) {
+  const { ref } = use3DTilt<HTMLDivElement>({
+    max: 6,
+    perspective: 1500,
+    scale: 1.02,
+    speed: 450,
+    glare: true,
+    maxGlare: 0.2,
+  });
+
+  const Icon = iconMap[feature.icon] ?? Sparkles;
+
+  return (
+    <ScrollReveal
+      variant="slide-up"
+      delay={index * 0.1}
+      duration={0.7}
+      className={cn(
+        "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl transition-all duration-500",
+        layoutClass
+      )}
+    >
+      <div
+        ref={ref}
+        className="relative h-full overflow-hidden rounded-[28px] p-6"
+      >
+        <div
+          className="absolute inset-0 rounded-[28px]"
+          style={{
+            boxShadow: `0 30px 80px ${accent}22`,
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
+        <div
+          className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100"
+          style={{
+            background: `linear-gradient(135deg, ${accent}22, transparent 60%)`,
+          }}
+        />
+        <div className="relative flex h-full flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">
+              <Icon className="h-5 w-5" />
+            </div>
+            {feature.badge && (
+              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                {feature.badge}
+              </span>
+            )}
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-white">
+              {feature.title}
+            </h3>
+            <p className="text-sm text-white/70">{feature.description}</p>
+          </div>
+          <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+              Highlight
+            </p>
+            <p className="mt-2 text-sm text-white/80">
+              <AnimateShine text={feature.highlight} speed={16} />
+            </p>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+}
 
 export function Features() {
   const [persona, setPersona] = useState<PersonaId>(defaultPersona);
@@ -185,61 +263,15 @@ export function Features() {
             }}
           />
 
-          {items.map((feature: FeatureEntry, index: number) => {
-            const Icon = iconMap[feature.icon] ?? Sparkles;
-
-            return (
-              <ScrollReveal
-                key={feature.id}
-                variant="slide-up"
-                delay={index * 0.1}
-                duration={0.7}
-                className={cn(
-                  "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-2xl transition-transform duration-500 hover:-translate-y-1.5",
-                  layoutClasses[index] ?? "md:col-span-1"
-                )}
-              >
-                <div
-                  className="absolute inset-0 rounded-[28px]"
-                  style={{
-                    boxShadow: `0 30px 80px ${personaConfig!.accent}22`,
-                  }}
-                />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100" style={{
-                  background: `linear-gradient(135deg, ${personaConfig!.accent}22, transparent 60%)`,
-                }} />
-                <div className="relative flex h-full flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    {feature.badge && (
-                      <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                        {feature.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-semibold text-white">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-white/70">
-                      {feature.description}
-                    </p>
-                  </div>
-                  <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      Highlight
-                    </p>
-                    <p className="mt-2 text-sm text-white/80">
-                      <AnimateShine text={feature.highlight} speed={16} />
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            );
-          })}
+          {items.map((feature: FeatureEntry, index: number) => (
+            <FeatureCard
+              key={feature.id}
+              feature={feature}
+              accent={personaConfig!.accent}
+              index={index}
+              layoutClass={layoutClasses[index] ?? "md:col-span-1"}
+            />
+          ))}
         </div>
       </div>
     </section>
