@@ -41,6 +41,7 @@ export function TrustedBy() {
                   <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-zinc-800/60 to-zinc-900/60 text-xl font-bold text-zinc-100 group-hover:text-white transition-colors duration-300 overflow-hidden">
                     {company.logo ? (
                       // Use a simple <img> to remain compatible with static export and avoid Next.js Image optimization issues
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img src={company.logo} alt={company.name} className="w-10 h-10 object-contain" />
                     ) : (
                       <span>{getInitials(company.name)}</span>
