@@ -23,13 +23,13 @@ function CTACard() {
   return (
     <div
       ref={ref}
-      className="relative overflow-hidden rounded-[36px] border border-white/8 bg-white/[0.04] px-6 py-12 backdrop-blur-2xl md:px-12 md:py-16"
+      className="relative overflow-hidden rounded-[36px] bg-adaptive-glass px-6 py-12 md:px-12 md:py-16"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),transparent_60%)] opacity-80" />
+      <div className="absolute inset-0 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.1),transparent_60%)] light:bg-[linear-gradient(135deg,rgba(139,92,246,0.08),transparent_60%)] opacity-80" />
       <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
         <ScrollReveal variant="slide-up" duration={0.7}>
           <div className="flex flex-col gap-4">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+            <p className="text-xs uppercase tracking-[0.3em] text-adaptive-muted">
               Launch faster than ever
             </p>
             <h2
@@ -40,10 +40,10 @@ function CTACard() {
                 {siteConfig.cta.headline}
               </GradientText>
             </h2>
-            <p className="text-lg text-white/70 md:text-xl">
+            <p className="text-lg text-adaptive-secondary md:text-xl">
               {siteConfig.cta.subheadline}
             </p>
-            <div className="text-base font-medium text-white">
+            <div className="text-base font-medium text-adaptive-primary">
               <AnimateShine text={siteConfig.cta.shimmer} speed={10} />
             </div>
           </div>
@@ -66,8 +66,8 @@ function CTACard() {
               duration={3 + index * 0.4}
               yOffset={6}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:scale-105">
-                <Check className="h-4 w-4 text-emerald-300" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-adaptive-glass px-4 py-2 transition-all duration-300 hover:scale-105 text-adaptive-secondary">
+                <Check className="h-4 w-4 text-emerald-500" />
                 <span>{bullet.label}</span>
               </div>
             </FloatingElement>
@@ -81,12 +81,12 @@ function CTACard() {
 export function CTASection() {
   return (
     <section
-      className="relative overflow-hidden border-t border-white/5 py-24 md:py-32"
+      className="relative overflow-hidden border-t dark:border-white/5 light:border-purple-200/30 py-24 md:py-32"
       aria-labelledby="cta-heading"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(8,10,20,0.96),rgba(1,1,4,0.98))]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.25),transparent_60%),radial-gradient(circle_at_80%_30%,rgba(47,109,255,0.28),transparent_60%)] opacity-80" />
-      <div className="absolute inset-x-0 top-1/2 h-[520px] -translate-y-1/2 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)] blur-3xl" />
+      <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top,rgba(8,10,20,0.96),rgba(1,1,4,0.98))] light:bg-[linear-gradient(180deg,rgba(250,245,255,0.7),rgba(240,249,255,0.8))]" />
+      <div className="absolute inset-0 gradient-adaptive-radial opacity-80" />
+      <div className="absolute inset-x-0 top-1/2 h-[520px] -translate-y-1/2 dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_70%)] light:bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.08),transparent_70%)] blur-3xl" />
 
       <div className="container relative z-10 mx-auto max-w-6xl px-6 md:px-8">
         <CTACard />

@@ -38,7 +38,7 @@ function StatCard({ stat, accent }: StatCardProps) {
   return (
     <div
       ref={ref}
-      className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-left backdrop-blur-xl transition-all duration-300"
+      className="relative overflow-hidden rounded-3xl bg-adaptive-card p-6 text-left backdrop-blur-xl transition-all duration-300"
       style={{
         borderColor: isHovering ? `${accent}40` : undefined,
       }}
@@ -51,14 +51,14 @@ function StatCard({ stat, accent }: StatCardProps) {
         }}
       />
       <div className="relative space-y-2">
-        <p className="text-3xl font-semibold text-white md:text-4xl">
+        <p className="text-3xl font-semibold text-adaptive-primary md:text-4xl">
           <AnimateShine
             text={`${stat.value}${stat.suffix}`}
             speed={10}
-            className="text-white"
+            className="text-adaptive-primary"
           />
         </p>
-        <p className="text-sm uppercase tracking-[0.3em] text-white/60">
+        <p className="text-sm uppercase tracking-[0.3em] text-adaptive-muted">
           {stat.label}
         </p>
       </div>
@@ -77,13 +77,13 @@ function ShowcaseDarkCard() {
   });
 
   return (
-    <div ref={ref} className="relative overflow-hidden rounded-3xl border border-white/12 bg-black/60 p-6 shadow-2xl">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(209,9,76,0.4),transparent_70%)] opacity-80" />
+    <div ref={ref} className="relative overflow-hidden rounded-3xl border border-white/12 dark:bg-black/60 light:bg-white/90 p-6 shadow-2xl">
+      <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top_left,rgba(209,9,76,0.4),transparent_70%)] light:bg-[radial-gradient(circle_at_top_left,rgba(236,72,153,0.15),transparent_70%)] opacity-80" />
       <div className="relative flex flex-col gap-4">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/40">
+        <div className="flex items-center justify-between border-b border-white/10 dark:border-white/10 light:border-gray-200 pb-4">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-adaptive-muted">
             <span>Dark Deck</span>
-            <span className="h-1 w-1 rounded-full bg-white/30" />
+            <span className="h-1 w-1 rounded-full dark:bg-white/30 light:bg-gray-400" />
             <span>Parallax Ready</span>
           </div>
           <div className="flex gap-1.5">
@@ -92,17 +92,17 @@ function ShowcaseDarkCard() {
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
           </div>
         </div>
-        <p className="text-sm font-medium text-white/80">
+        <p className="text-sm font-medium text-adaptive-secondary">
           Layer hero shots and glass cards into a cinematic dashboard.
         </p>
         <div className="grid gap-3 md:grid-cols-2">
           {[1, 2, 3, 4].map((item) => (
             <div
               key={`dark-card-${item}`}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-transform hover:scale-105"
+              className="rounded-2xl bg-adaptive-card p-4 transition-transform hover:scale-105"
             >
-              <div className="mb-3 h-10 w-10 rounded-xl bg-gradient-to-br from-white/15 to-white/5" />
-              <div className="h-2 w-3/4 rounded-full bg-white/20" />
+              <div className="mb-3 h-10 w-10 rounded-xl dark:bg-gradient-to-br dark:from-white/15 dark:to-white/5 light:bg-gradient-to-br light:from-purple-100 light:to-blue-50" />
+              <div className="h-2 w-3/4 rounded-full dark:bg-white/20 light:bg-gray-300" />
             </div>
           ))}
         </div>
@@ -122,13 +122,13 @@ function ShowcaseLightCard() {
   });
 
   return (
-    <div ref={ref} className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.85] p-6 shadow-2xl">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(47,109,255,0.35),transparent_70%)] opacity-90" />
-      <div className="relative flex flex-col gap-4 text-black">
-        <div className="flex items-center justify-between border-b border-black/10 pb-4">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-black/60">
+    <div ref={ref} className="relative overflow-hidden rounded-3xl border dark:border-white/12 light:border-purple-200 dark:bg-white/[0.85] light:bg-white/95 p-6 shadow-2xl">
+      <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_bottom_right,rgba(47,109,255,0.35),transparent_70%)] light:bg-[radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_70%)] opacity-90" />
+      <div className="relative flex flex-col gap-4 dark:text-black light:text-gray-900">
+        <div className="flex items-center justify-between border-b dark:border-black/10 light:border-gray-200 pb-4">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] dark:text-black/60 light:text-gray-600">
             <span>Light Deck</span>
-            <span className="h-1 w-1 rounded-full bg-black/30" />
+            <span className="h-1 w-1 rounded-full dark:bg-black/30 light:bg-gray-400" />
             <span>Case Studies</span>
           </div>
           <div className="flex gap-1.5">
@@ -137,17 +137,17 @@ function ShowcaseLightCard() {
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
           </div>
         </div>
-        <p className="text-sm font-medium text-black/70">
+        <p className="text-sm font-medium dark:text-black/70 light:text-gray-700">
           Swap palettes and ship client-ready marketing in minutes.
         </p>
         <div className="grid gap-3 md:grid-cols-2">
           {[1, 2, 3, 4].map((item) => (
             <div
               key={`light-card-${item}`}
-              className="rounded-2xl border border-black/5 bg-white p-4 shadow-sm transition-transform hover:scale-105"
+              className="rounded-2xl border dark:border-black/5 light:border-purple-100 dark:bg-white light:bg-white/80 p-4 shadow-sm transition-transform hover:scale-105"
             >
-              <div className="mb-3 h-10 w-10 rounded-xl bg-gradient-to-br from-slate-200 to-slate-100" />
-              <div className="h-2 w-3/4 rounded-full bg-black/10" />
+              <div className="mb-3 h-10 w-10 rounded-xl bg-gradient-to-br dark:from-slate-200 dark:to-slate-100 light:from-purple-100 light:to-blue-100" />
+              <div className="h-2 w-3/4 rounded-full dark:bg-black/10 light:bg-gray-300" />
             </div>
           ))}
         </div>
@@ -175,11 +175,11 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-28 md:pt-36">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,10,20,0.95),rgba(3,3,8,0.92))]" />
+      <div className="absolute inset-0 bg-adaptive-section" />
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-x-0 top-16 h-[420px] bg-[radial-gradient(circle_at_top,rgba(126,34,206,0.45),transparent_65%)] blur-3xl" />
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.03)_1px,transparent_1px,transparent_10px)] opacity-40" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(209,9,76,0.1),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(47,109,255,0.12),transparent_45%)] opacity-80" />
+        <div className="absolute inset-x-0 top-16 h-[420px] gradient-adaptive-top blur-3xl" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.03)_1px,transparent_1px,transparent_10px)] opacity-40 dark:opacity-40 light:opacity-20" />
+        <div className="absolute inset-0 gradient-adaptive-radial opacity-80" />
       </div>
 
       <div className="container relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 pb-24 md:px-8">
@@ -192,16 +192,16 @@ export function Hero() {
               </span>
             </Badge>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs uppercase tracking-[0.3em] text-white/60">
+            <div className="flex flex-wrap items-center justify-center gap-2 rounded-full bg-adaptive-glass px-3 py-1.5 text-xs uppercase tracking-[0.3em] text-adaptive-muted">
               <span>Tailwind</span>
-              <span className="text-white/20">•</span>
+              <span className="opacity-30">•</span>
               <span>Next.js 14</span>
-              <span className="text-white/20">•</span>
+              <span className="opacity-30">•</span>
               <span>Framer Motion Ready</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.03] p-2 backdrop-blur-xl">
+          <div className="flex flex-wrap items-center justify-center gap-3 rounded-full bg-adaptive-glass p-2">
             {personas.map((entry) => (
               <GlassButton
                 key={entry.id}
@@ -215,7 +215,7 @@ export function Hero() {
           </div>
 
           <div className="relative max-w-5xl space-y-6">
-            <h1 className="relative text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="relative text-4xl font-bold tracking-tight text-adaptive-primary md:text-5xl lg:text-6xl xl:text-7xl">
               <span className="invisible">{persona!.heroTitle}</span>
               <span className="sr-only">{persona!.heroTitle}</span>
               <span className="pointer-events-none absolute inset-0">
@@ -265,8 +265,8 @@ export function Hero() {
 
         <LaunchCountdown />
 
-        <div className="relative mt-16 w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.02] p-6 backdrop-blur-2xl md:p-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(126,34,206,0.28),transparent_65%)]" />
+        <div className="relative mt-16 w-full max-w-6xl overflow-hidden rounded-[32px] bg-adaptive-glass p-6 md:p-10">
+          <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top,rgba(126,34,206,0.28),transparent_65%)] light:bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.12),transparent_65%)]" />
           <div className="relative grid gap-6 md:grid-cols-2">
             <ShowcaseDarkCard />
             <ShowcaseLightCard />

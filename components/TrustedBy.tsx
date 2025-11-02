@@ -37,8 +37,8 @@ function CompanyCard({ company, index }: CompanyCardProps) {
       className="w-full"
     >
       <div ref={ref} className="w-full">
-        <div className="flex items-center justify-center w-full h-20 rounded-xl border border-zinc-700/50 bg-zinc-900/30 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 hover:bg-zinc-900/60 hover:shadow-lg hover:shadow-purple-500/20">
-          <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-zinc-800/60 to-zinc-900/60 text-xl font-bold text-zinc-100 transition-colors duration-300 overflow-hidden">
+        <div className="flex items-center justify-center w-full h-20 rounded-xl bg-adaptive-card backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 dark:hover:bg-zinc-900/60 light:hover:bg-white/90 hover:shadow-lg hover:shadow-purple-500/20">
+          <div className="flex items-center justify-center w-14 h-14 rounded-xl dark:bg-gradient-to-br dark:from-zinc-800/60 dark:to-zinc-900/60 light:bg-gradient-to-br light:from-purple-50 light:to-blue-50 text-xl font-bold text-adaptive-primary transition-colors duration-300 overflow-hidden">
             {company.logo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -63,7 +63,7 @@ export function TrustedBy() {
   const companies = siteConfig.trustedBy?.companies ?? [];
 
   return (
-    <section className="py-20 border-t border-zinc-800/50">
+    <section className="py-20 border-t dark:border-zinc-800/50 light:border-purple-200/30">
       <div className="container mx-auto max-w-7xl px-4 md:px-8">
         <ScrollReveal variant="fade" duration={0.6}>
           <div className="text-center mb-16">

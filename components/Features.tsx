@@ -97,7 +97,7 @@ function FeatureCard({ feature, accent, index, layoutClass }: FeatureCardProps) 
       delay={index * 0.1}
       duration={0.7}
       className={cn(
-        "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl transition-all duration-500",
+        "relative overflow-hidden rounded-[28px] bg-adaptive-card backdrop-blur-2xl transition-all duration-500",
         layoutClass
       )}
     >
@@ -111,7 +111,7 @@ function FeatureCard({ feature, accent, index, layoutClass }: FeatureCardProps) 
             boxShadow: `0 30px 80px ${accent}22`,
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
+        <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)] light:bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.08),transparent_70%)]" />
         <div
           className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100"
           style={{
@@ -120,26 +120,26 @@ function FeatureCard({ feature, accent, index, layoutClass }: FeatureCardProps) 
         />
         <div className="relative flex h-full flex-col gap-4">
           <div className="flex items-center justify-between">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-adaptive-glass text-adaptive-primary">
               <Icon className="h-5 w-5" />
             </div>
             {feature.badge && (
-              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+              <span className="rounded-full bg-adaptive-glass px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-adaptive-muted">
                 {feature.badge}
               </span>
             )}
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-white">
+            <h3 className="text-xl font-semibold text-adaptive-primary">
               {feature.title}
             </h3>
-            <p className="text-sm text-white/70">{feature.description}</p>
+            <p className="text-sm text-adaptive-secondary">{feature.description}</p>
           </div>
-          <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+          <div className="mt-auto rounded-2xl bg-adaptive-glass p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-adaptive-muted">
               Highlight
             </p>
-            <p className="mt-2 text-sm text-white/80">
+            <p className="mt-2 text-sm text-adaptive-secondary">
               <AnimateShine text={feature.highlight} speed={16} />
             </p>
           </div>
@@ -209,29 +209,29 @@ export function Features() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden border-t border-white/5 py-24 md:py-32"
+      className="relative overflow-hidden border-t dark:border-white/5 light:border-purple-200/30 py-24 md:py-32"
       aria-labelledby="features-heading"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(8,10,20,0.95),rgba(2,2,5,0.98))]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(126,34,206,0.12),transparent_50%),radial-gradient(circle_at_85%_20%,rgba(47,109,255,0.2),transparent_55%)] opacity-70" />
+      <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top,rgba(8,10,20,0.95),rgba(2,2,5,0.98))] light:bg-[linear-gradient(180deg,rgba(250,245,255,0.6),rgba(240,249,255,0.7))]" />
+      <div className="absolute inset-0 gradient-adaptive-radial opacity-70" />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-8">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+          <p className="text-xs uppercase tracking-[0.3em] text-adaptive-muted">
             Persona aware components
           </p>
           <h2
             id="features-heading"
-            className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
+            className="text-3xl font-bold text-adaptive-primary md:text-4xl lg:text-5xl"
           >
             {personaConfig!.label} get{" "}
             <AnimateShine
               text="conversion-ready sections"
-              className="text-white"
+              className="text-adaptive-primary"
               speed={14}
             />
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-lg text-adaptive-secondary">
             Swap personas to preview how Vetra reshapes feature highlights,
             proof points, and CTAs. Every block respects your brand accents and
             launches with accessible defaults.
