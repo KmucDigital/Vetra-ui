@@ -23,16 +23,16 @@ export function Hero() {
   );
 
   const persona = useMemo(() => {
-    const fallback = personas[0];
+    const fallback = personas[0]!;
     return personas.find((entry) => entry.id === activePersona) ?? fallback;
   }, [activePersona]);
 
   useEffect(() => {
     const event = new CustomEvent("vetra:persona-change", {
-      detail: { persona: persona.id },
+      detail: { persona: persona!.id },
     });
     window.dispatchEvent(event);
-  }, [persona.id]);
+  }, [persona]);
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-28 md:pt-36">
@@ -67,7 +67,7 @@ export function Hero() {
               <GlassButton
                 key={entry.id}
                 accent={entry.accent}
-                active={persona.id === entry.id}
+                active={persona!.id === entry.id}
                 onClick={() => setActivePersona(entry.id)}
               >
                 {entry.label}
@@ -77,12 +77,12 @@ export function Hero() {
 
           <div className="relative max-w-5xl space-y-6">
             <h1 className="relative text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
-              <span className="invisible">{persona.heroTitle}</span>
-              <span className="sr-only">{persona.heroTitle}</span>
+              <span className="invisible">{persona!.heroTitle}</span>
+              <span className="sr-only">{persona!.heroTitle}</span>
               <span className="pointer-events-none absolute inset-0">
                 <Typewriter
-                  key={persona.id}
-                  text={[persona.heroTitle]}
+                  key={persona!.id}
+                  text={[persona!.heroTitle]}
                   typingSpeed={70}
                   pauseDuration={1200}
                   showCursor={true}
@@ -93,23 +93,23 @@ export function Hero() {
             </h1>
 
             <p className="mx-auto max-w-3xl text-lg text-white/70 md:text-xl lg:text-2xl">
-              {persona.heroSubtitle}
+              {persona!.heroSubtitle}
             </p>
           </div>
 
-          <Link href={persona.ctaLink} className="group">
+          <Link href={persona!.ctaLink} className="group">
             <GlassButton
-              accent={persona.accent}
+              accent={persona!.accent}
               active
               className="gap-3 px-7 py-3 text-base font-semibold md:text-lg"
             >
-              {persona.ctaText}
+              {persona!.ctaText}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
             </GlassButton>
           </Link>
 
           <div className="grid w-full max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
-            {persona.stats.map((stat) => (
+            {persona!.stats.map((stat) => (
               <div
                 key={stat.label}
                 className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-left backdrop-blur-xl"
@@ -117,7 +117,7 @@ export function Hero() {
                 <div
                   className="absolute inset-0 opacity-70"
                   style={{
-                    background: `radial-gradient(circle at top, ${persona.accent}33, transparent 65%)`,
+                    background: `radial-gradient(circle at top, ${persona!.accent}33, transparent 65%)`,
                   }}
                 />
                 <div className="relative space-y-2">

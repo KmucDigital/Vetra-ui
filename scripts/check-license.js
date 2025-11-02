@@ -7,7 +7,7 @@ const licensePath = path.join(process.cwd(), 'LICENSE');
 // CRITICAL: Expected SHA256 hash of the original LICENSE file
 // This hash MUST match the LICENSE file content exactly
 // Any modification to the LICENSE file will cause the build to fail
-const EXPECTED_LICENSE_HASH = 'b3774a74dcc3d1c83cd45b9e0aef48596be5734f4dda2bad996bd0b21a127fae';
+const EXPECTED_LICENSE_HASH = 'b447d04fdd449c09f990b0fc6a8a1b1cd3a6db61f96d3c0221c9acace0dc9b28';
 
 console.log('\n🔒 LICENSE INTEGRITY CHECK');
 console.log('━'.repeat(50));

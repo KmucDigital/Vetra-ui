@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/lib/siteConfig";
-
-// Lazy load CursorBackground (only loads on desktop, includes Framer Motion)
-// This prevents loading 169KB Framer Motion bundle on mobile where it's not used
-const CursorBackground = dynamic(() => import("@/components/backroundeffect"), {
-  ssr: false, // Client-only component
-});
+import { WebVitals } from "@/components/WebVitals";
+import { ClientLayout } from "@/components/ClientLayout";
 
 const inter = localFont({
   variable: "--font-sans",
@@ -102,6 +97,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
       <head>
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+
         {/* Resource Hints for Performance */}
         <link rel="preconnect" href="https://github.com" />
         <link rel="dns-prefetch" href="https://github.com" />
@@ -111,10 +109,16 @@ export default function RootLayout({
         {/* Theme Color */}
         <meta name="theme-color" content="#000000" />
         <meta name="application-name" content="Vetra UI" />
+
+        {/* Mobile Optimization */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Vetra UI" />
       </head>
       <body className="font-sans relative overflow-x-hidden">
-        <CursorBackground />
-        {children}
+        <WebVitals />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

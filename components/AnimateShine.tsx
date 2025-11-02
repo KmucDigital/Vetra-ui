@@ -1,13 +1,13 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import type { CSSProperties, ElementType } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimateShineProps {
   text: string;
   speed?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
 export function AnimateShine({

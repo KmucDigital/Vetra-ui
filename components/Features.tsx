@@ -22,6 +22,7 @@ import {
 import { siteConfig } from "@/lib/siteConfig";
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { cn } from "@/lib/utils";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
@@ -76,14 +77,14 @@ export function Features() {
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 });
 
   const personaConfig = useMemo(() => {
-    const fallback = personaCatalog[0];
+    const fallback = personaCatalog[0]!;
     return personaCatalog.find((entry) => entry.id === persona) ?? fallback;
   }, [persona]);
 
   const items = useMemo<FeatureEntry[]>(() => {
-    const key = personaConfig.id;
+    const key = personaConfig!.id;
     return featureCatalog[key] ?? [];
-  }, [personaConfig.id]);
+  }, [personaConfig]);
 
   useEffect(() => {
     const handler = (event: Event) => {
@@ -145,7 +146,7 @@ export function Features() {
             id="features-heading"
             className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
           >
-            {personaConfig.label} get{" "}
+            {personaConfig!.label} get{" "}
             <AnimateShine
               text="conversion-ready sections"
               className="text-white"
@@ -163,7 +164,7 @@ export function Features() {
               <GlassButton
                 key={entry.id}
                 accent={entry.accent}
-                active={entry.id === personaConfig.id}
+                active={entry.id === personaConfig!.id}
                 onClick={() => setPersona(entry.id)}
               >
                 {entry.label}
@@ -179,7 +180,7 @@ export function Features() {
           <div
             className="pointer-events-none absolute inset-0 rounded-[32px] transition-opacity duration-700"
             style={{
-              background: `radial-gradient(600px circle at ${spotlight.x}% ${spotlight.y}%, ${personaConfig.accent}33, transparent 65%)`,
+              background: `radial-gradient(600px circle at ${spotlight.x}% ${spotlight.y}%, ${personaConfig!.accent}33, transparent 65%)`,
               opacity: spotlight.opacity,
             }}
           />
@@ -188,19 +189,25 @@ export function Features() {
             const Icon = iconMap[feature.icon] ?? Sparkles;
 
             return (
-              <div
+              <ScrollReveal
                 key={feature.id}
+                variant="slide-up"
+                delay={index * 0.1}
+                duration={0.7}
                 className={cn(
                   "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-2xl transition-transform duration-500 hover:-translate-y-1.5",
                   layoutClasses[index] ?? "md:col-span-1"
                 )}
-                style={{
-                  boxShadow: `0 30px 80px ${personaConfig.accent}22`,
-                }}
               >
+                <div
+                  className="absolute inset-0 rounded-[28px]"
+                  style={{
+                    boxShadow: `0 30px 80px ${personaConfig!.accent}22`,
+                  }}
+                />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
                 <div className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100" style={{
-                  background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
+                  background: `linear-gradient(135deg, ${personaConfig!.accent}22, transparent 60%)`,
                 }} />
                 <div className="relative flex h-full flex-col gap-4">
                   <div className="flex items-center justify-between">
@@ -230,7 +237,7 @@ export function Features() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>
