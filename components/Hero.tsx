@@ -9,6 +9,7 @@ import { GlassButton } from "@/components/GlassButton";
 import { AnimateShine } from "@/components/AnimateShine";
 import { LaunchCountdown } from "@/components/LaunchCountdown";
 import { FloatingElement } from "@/components/FloatingElement";
+import { GradientText } from "@/components/GradientText";
 import { use3DTilt } from "@/hooks/use3DTilt";
 // @ts-ignore - TextType is a JSX component
 import TextType from "@/components/TextType";
@@ -230,8 +231,10 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="mx-auto max-w-3xl text-lg text-white/70 md:text-xl lg:text-2xl">
-              {persona!.heroSubtitle}
+            <p className="mx-auto max-w-3xl text-lg md:text-xl lg:text-2xl">
+              <GradientText gradient="purple" animate={true} className="text-white/90">
+                {persona!.heroSubtitle}
+              </GradientText>
             </p>
           </div>
 
