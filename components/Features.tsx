@@ -138,12 +138,12 @@ export function Features() {
 
       <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-8">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+          <p className="text-xs uppercase tracking-[0.3em] text-secondary">
             Persona aware components
           </p>
           <h2
             id="features-heading"
-            className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
+            className="text-3xl font-bold text-white md:text-4xl lg:text-5xl text-fluid-xl"
           >
             {personaConfig.label} get{" "}
             <AnimateShine
@@ -152,13 +152,13 @@ export function Features() {
               speed={14}
             />
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-lg text-secondary text-fluid">
             Swap personas to preview how Vetra reshapes feature highlights,
             proof points, and CTAs. Every block respects your brand accents and
             launches with accessible defaults.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.02] p-2 backdrop-blur-xl">
+          <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.02] p-2 backdrop-blur-xl glass-surface gpu-accelerated">
             {personaCatalog.map((entry) => (
               <GlassButton
                 key={entry.id}
@@ -191,7 +191,7 @@ export function Features() {
               <div
                 key={feature.id}
                 className={cn(
-                  "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-2xl transition-transform duration-500 hover:-translate-y-1.5",
+                  "relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-2xl transition-transform duration-500 hover:-translate-y-1.5 glass-surface hover-lift gpu-accelerated",
                   layoutClasses[index] ?? "md:col-span-1"
                 )}
                 style={{
@@ -208,7 +208,7 @@ export function Features() {
                       <Icon className="h-5 w-5" />
                     </div>
                     {feature.badge && (
-                      <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                      <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-secondary">
                         {feature.badge}
                       </span>
                     )}
@@ -217,15 +217,15 @@ export function Features() {
                     <h3 className="text-xl font-semibold text-white">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-white/70">
+                    <p className="text-sm text-secondary">
                       {feature.description}
                     </p>
                   </div>
                   <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+                    <p className="text-xs uppercase tracking-[0.2em] text-secondary-light">
                       Highlight
                     </p>
-                    <p className="mt-2 text-sm text-white/80">
+                    <p className="mt-2 text-sm text-secondary">
                       <AnimateShine text={feature.highlight} speed={16} />
                     </p>
                   </div>

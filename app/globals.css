@@ -132,9 +132,78 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* Improved focus states for accessibility */
+  .focus-visible:focus-visible {
+    outline: 2px solid rgb(168, 85, 247);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* Better contrast for secondary text */
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .text-secondary-light {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Fluid typography for better responsive scaling */
+  .text-fluid {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+
+  .text-fluid-lg {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+
+  .text-fluid-xl {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  /* Enhanced glassmorphism depth */
+  .glass-surface {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .glass-surface-deep {
+    backdrop-filter: blur(40px) saturate(200%);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 64px 0 rgba(31, 38, 135, 0.5);
+  }
+
+  /* Optimized animations for performance */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Enhanced hover states */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px) translateZ(0);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Better mobile touch targets */
+  @media (max-width: 768px) {
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
 }
-
-
 
 @layer base {
   * {

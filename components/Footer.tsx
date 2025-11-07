@@ -19,7 +19,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-zinc-200 hover:text-white transition-colors duration-200"
+                      className="text-sm text-secondary hover:text-white transition-colors duration-200 focus-visible touch-target py-1"
                     >
                       {link.label}
                     </Link>
@@ -34,10 +34,10 @@ export function Footer() {
         <div className="pt-10 border-t border-zinc-800/50 mb-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <Link href="/" className="flex items-center mb-3">
-                <div className="text-xl md:text-2xl font-bold tracking-tight">{siteConfig.name}</div>
+              <Link href="/" className="flex items-center mb-3 touch-target">
+                <div className="text-xl md:text-2xl font-bold tracking-tight text-white">{siteConfig.name}</div>
               </Link>
-              <p className="text-sm text-zinc-200 leading-relaxed max-w-md">
+              <p className="text-sm text-secondary leading-relaxed max-w-md text-fluid">
                 {siteConfig.description}
               </p>
             </div>
@@ -46,7 +46,7 @@ export function Footer() {
                 <Link
                   key={social.name}
                   href={social.href}
-                  className="text-zinc-200 hover:text-white transition-colors duration-200 p-2 hover:bg-zinc-800 rounded-lg"
+                  className="text-secondary hover:text-white transition-colors duration-200 p-3 hover:bg-zinc-800 rounded-lg focus-visible touch-target"
                   aria-label={social.name}
                 >
                   {social.icon === "discord" && <MessageCircle className="h-5 w-5" />}
@@ -61,9 +61,9 @@ export function Footer() {
 
         {/* Copyright & License Link */}
         <div className="pt-10 border-t border-zinc-800/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <p className="text-sm text-zinc-200 text-center sm:text-left">Created by kmuc</p>
+          <p className="text-sm text-secondary text-center sm:text-left">Created by kmuc</p>
           <div className="text-sm">
-            <Link href="/license" className="text-sm text-zinc-300 hover:text-white">
+            <Link href="/license" className="text-sm text-secondary hover:text-white focus-visible touch-target py-1">
               License & Notice
             </Link>
           </div>

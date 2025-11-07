@@ -21,16 +21,16 @@ export function CTASection() {
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),transparent_60%)] opacity-80" />
           <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-8 text-center">
             <div className="flex flex-col gap-4">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+              <p className="text-xs uppercase tracking-[0.3em] text-secondary">
                 Launch faster than ever
               </p>
               <h2
                 id="cta-heading"
-                className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
+                className="text-3xl font-bold text-white md:text-4xl lg:text-5xl text-fluid-xl"
               >
                 {siteConfig.cta.headline}
               </h2>
-              <p className="text-lg text-white/70 md:text-xl">
+              <p className="text-lg text-secondary md:text-xl text-fluid">
                 {siteConfig.cta.subheadline}
               </p>
               <div className="text-base font-medium text-white">
@@ -39,17 +39,17 @@ export function CTASection() {
             </div>
 
             <Link href={siteConfig.cta.buttonHref} className="group">
-              <GlassButton active accent="#6B1F87" className="gap-3 px-7 py-3 text-base">
+              <GlassButton active accent="#6B1F87" className="gap-3 px-7 py-3 text-base hover-lift">
                 {siteConfig.cta.buttonText}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </GlassButton>
             </Link>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/70 md:flex-nowrap">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-secondary md:flex-nowrap">
               {siteConfig.cta.bullets.map((bullet) => (
                 <div
                   key={bullet.label}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 backdrop-blur-xl"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 backdrop-blur-xl glass-surface hover-lift gpu-accelerated"
                 >
                   <Check className="h-4 w-4 text-emerald-300" />
                   <span>{bullet.label}</span>

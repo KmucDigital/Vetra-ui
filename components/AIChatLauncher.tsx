@@ -48,11 +48,11 @@ export function AIChatLauncher() {
       data-ai-chat-root
     >
       {isOpen && (
-        <div className="relative w-[min(420px,calc(100vw-3rem))] overflow-hidden rounded-3xl border border-white/12 bg-black/80 p-6 shadow-2xl backdrop-blur-2xl transition-all duration-300">
+        <div className="relative w-[min(420px,calc(100vw-3rem))] overflow-hidden rounded-3xl border border-white/12 bg-black/80 p-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 glass-surface-deep gpu-accelerated">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(126,34,206,0.35),transparent_70%)]" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+              <p className="text-xs uppercase tracking-[0.3em] text-secondary">
                 Session {sessionLabel}
               </p>
               <h3 className="text-lg font-semibold text-white">
@@ -60,7 +60,7 @@ export function AIChatLauncher() {
               </h3>
             </div>
             <button
-              className="rounded-full border border-white/10 p-2 text-white/70 transition-colors hover:text-white"
+              className="rounded-full border border-white/10 p-3 text-secondary hover:text-white transition-colors focus-visible touch-target"
               onClick={toggleOpen}
               aria-label="Close chat"
             >
@@ -68,14 +68,14 @@ export function AIChatLauncher() {
             </button>
           </div>
 
-          <div className="mt-4 space-y-3 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
-            <p className="text-sm text-white/70">
+          <div className="mt-4 space-y-3 rounded-2xl border border-white/10 bg-white/[0.02] p-4 glass-surface">
+            <p className="text-sm text-secondary">
               <AnimateShine
                 text="Streaming responses ready — wire up your API route to go live."
                 speed={12}
               />
             </p>
-            <ul className="space-y-2 text-xs text-white/60">
+            <ul className="space-y-2 text-xs text-secondary">
               <li>• Swap in your endpoint at `/app/api/chat/route.ts`.</li>
               <li>• Stream responses with Server Sent Events or WebSockets.</li>
               <li>• Persist threads with Supabase, Planetscale, or KV.</li>
@@ -91,17 +91,17 @@ export function AIChatLauncher() {
               setDraft("");
             }}
           >
-            <label htmlFor="vetra-chat-input" className="text-xs text-white/60">
+            <label htmlFor="vetra-chat-input" className="text-xs text-secondary">
               Your Message
             </label>
             <textarea
               id="vetra-chat-input"
-              className="min-h-[96px] w-full resize-none rounded-2xl border border-white/10 bg-black/60 p-4 text-sm text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50"
-              placeholder="Try: “Generate a hero section with spotlight hover states.”"
+              className="min-h-[96px] w-full resize-none rounded-2xl border border-white/10 bg-black/60 p-4 text-sm text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 glass-surface touch-target"
+              placeholder="Try: Generate a hero section with spotlight hover states."
               value={draft}
-              onChange={(event) => setDraft(event.target.value)}
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setDraft(event.target.value)}
             />
-            <div className="flex items-center justify-between text-xs text-white/50">
+            <div className="flex items-center justify-between text-xs text-secondary">
               <span>Stubbed demo. Connect your AI backend to enable replies.</span>
               <GlassButton accent="#7E22CE" className="px-4 py-2 text-xs" onClick={toggleOpen}>
                 Close
