@@ -1,8 +1,10 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
+
 import { Check } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+
+import { PricingToggle } from "@/components/PricingToggle";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,11 +14,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PricingToggle } from "@/components/PricingToggle";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 
-export function Pricing() {
-  const [isAnnual, setIsAnnual] = React.useState(true);
+export function Pricing(): React.JSX.Element {
+  const [isAnnual, setIsAnnual] = useState(true);
 
   return (
     <section id="pricing" className="py-20 border-t border-zinc-800/50">
@@ -38,8 +40,11 @@ export function Pricing() {
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {siteConfig.pricing.plans.map((plan, index) => (
-            <div key={plan.name} className="transition-transform duration-300 hover:-translate-y-2 hover-lift gpu-accelerated">
+          {siteConfig.pricing.plans.map((plan, _index) => (
+            <div
+              key={plan.name}
+              className="transition-transform duration-300 hover:-translate-y-2 hover-lift gpu-accelerated"
+            >
               <Card
                 className={cn(
                   "relative h-full flex flex-col transition-all duration-300 border-zinc-800/50 bg-zinc-900/50 backdrop-blur-sm hover:border-zinc-700 hover:shadow-2xl glass-surface",
@@ -47,27 +52,33 @@ export function Pricing() {
                     "border-purple-500/50 shadow-xl shadow-purple-500/10 hover:shadow-purple-500/20 glass-surface-deep"
                 )}
               >
-                {plan.highlighted && (
+                {plan.highlighted ? (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg gpu-accelerated">
                       Popular
                     </span>
                   </div>
-                )}
+                ) : null}
 
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                  <CardDescription className="text-secondary">{plan.description}</CardDescription>
+                  <CardTitle className="text-2xl font-bold">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="text-secondary">
+                    {plan.description}
+                  </CardDescription>
                   <div className="mt-6">
                     <span className="text-4xl md:text-5xl font-bold">
                       ${isAnnual ? Math.floor(plan.price * 10) : plan.price}
                     </span>
-                    <span className="text-secondary">/{isAnnual ? 'year' : 'month'}</span>
-                    {isAnnual && (
+                    <span className="text-secondary">
+                      /{isAnnual ? "year" : "month"}
+                    </span>
+                    {isAnnual ? (
                       <div className="text-sm text-secondary mt-2">
                         ${plan.price}/month billed annually
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </CardHeader>
 
@@ -75,10 +86,14 @@ export function Pricing() {
                   <ul className="space-y-4">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
-                        <Check className={cn(
-                          "h-5 w-5 shrink-0 mt-0.5",
-                          plan.highlighted ? "text-purple-300" : "text-secondary"
-                        )} />
+                        <Check
+                          className={cn(
+                            "h-5 w-5 shrink-0 mt-0.5",
+                            plan.highlighted
+                              ? "text-purple-300"
+                              : "text-secondary"
+                          )}
+                        />
                         <span className="text-sm text-secondary leading-relaxed">
                           {feature}
                         </span>

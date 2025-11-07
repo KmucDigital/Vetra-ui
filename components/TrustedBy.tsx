@@ -1,6 +1,8 @@
+import Image from "next/image";
+
 import { siteConfig } from "@/lib/siteConfig";
 
-function getInitials(name: string) {
+function getInitials(name: string): string {
   return name
     .split(" ")
     .map((n) => n[0])
@@ -9,9 +11,9 @@ function getInitials(name: string) {
     .toUpperCase();
 }
 
-export function TrustedBy() {
+export function TrustedBy(): React.JSX.Element {
   // Use companies from siteConfig so logos from `public/` are honored
-  const companies = siteConfig.trustedBy?.companies ?? [];
+  const companies = siteConfig.trustedBy.companies ?? [];
 
   return (
     <section className="py-20 border-t border-zinc-800/50">
@@ -24,13 +26,22 @@ export function TrustedBy() {
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-10 items-center justify-items-center text-secondary">
           {companies.map((company) => (
-            <div key={company.name} className="group w-full transition-transform duration-300 hover:-translate-y-1 hover-lift gpu-accelerated">
+            <div
+              key={company.name}
+              className="group w-full transition-transform duration-300 hover:-translate-y-1 hover-lift gpu-accelerated"
+            >
               <div className="flex items-center justify-center w-full h-20 rounded-xl border border-zinc-700/50 bg-zinc-900/30 backdrop-blur-sm transition-all duration-300 hover:border-zinc-600 hover:bg-zinc-900/60 hover:shadow-lg hover:shadow-purple-500/10 glass-surface touch-target">
                 <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-zinc-800/60 to-zinc-900/60 text-xl font-bold text-secondary group-hover:text-white transition-colors duration-300 overflow-hidden">
-
                   {company.logo ? (
-                    // Use a simple <img> to remain compatible with static export and avoid Next.js Image optimization issues
-                    <img src={company.logo} alt={company.name} className="w-10 h-10 object-contain" />
+                    // Use Next.js Image for optimization
+                    <Image
+                      src={company.logo}
+                      alt={company.name}
+                      className="w-10 h-10 object-contain"
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                    />
                   ) : (
                     <span>{getInitials(company.name)}</span>
                   )}

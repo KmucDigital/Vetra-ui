@@ -1,40 +1,48 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
+
 import { Menu, X } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 
-export function Navigation() {
-  const [isOpen, setIsOpen] = React.useState(false);
+export function Navigation(): React.JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
 
   // Close menu on Escape key
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent): void => {
+      if (e.key === "Escape" && isOpen) {
         setIsOpen(false);
       }
     };
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener("keydown", handleEscape);
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, [isOpen]);
 
   // Lock body scroll when menu is open
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-2xl gpu-accelerated" role="banner">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-2xl gpu-accelerated"
+      role="banner"
+    >
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -44,7 +52,11 @@ export function Navigation() {
       </a>
 
       <div className="container mx-auto max-w-7xl px-6 md:px-8">
-        <nav className="flex items-center justify-between h-16 md:h-20" role="navigation" aria-label="Main navigation">
+        <nav
+          className="flex items-center justify-between h-16 md:h-20"
+          role="navigation"
+          aria-label="Main navigation"
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center touch-target">
             <div className="text-xl md:text-2xl font-bold tracking-tight text-white">
@@ -65,7 +77,10 @@ export function Navigation() {
             ))}
 
             {/* CTA Button */}
-            <Link href="https://github.com/kmucdigital/vetra-ui" className="ml-4">
+            <Link
+              href="https://github.com/kmucdigital/vetra-ui"
+              className="ml-4"
+            >
               <GlassButton className="px-5 py-2 text-sm" accent="#6B1F87">
                 Get Template
               </GlassButton>
@@ -75,7 +90,9 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-3 hover:bg-zinc-800 rounded-lg transition-colors touch-target focus-visible"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -107,7 +124,9 @@ export function Navigation() {
                 key={item.label}
                 href={item.href}
                 className="text-base font-medium text-secondary hover:text-white transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-zinc-800/50 focus-visible touch-target"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
               >
                 {item.label}
               </Link>
@@ -117,7 +136,9 @@ export function Navigation() {
             <Link
               href="https://github.com/kmucdigital/vetra-ui"
               className="mt-6 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-4 text-center text-sm font-semibold text-secondary hover:text-white transition-all duration-200 hover:bg-white/[0.1] focus-visible touch-target"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+              }}
             >
               Get Template
             </Link>

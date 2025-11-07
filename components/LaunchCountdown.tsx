@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { siteConfig } from "@/lib/siteConfig";
-import { AnimateShine } from "@/components/AnimateShine";
 
-type CountdownUnit = {
+import { AnimateShine } from "@/components/AnimateShine";
+import { siteConfig } from "@/lib/siteConfig";
+
+interface CountdownUnit {
   label: string;
   value: number;
-};
+}
 
 function getTimeDifference(targetDate: Date): CountdownUnit[] {
   const now = new Date();
@@ -27,11 +28,8 @@ function getTimeDifference(targetDate: Date): CountdownUnit[] {
   ];
 }
 
-export function LaunchCountdown() {
-  const target = useMemo(
-    () => new Date(siteConfig.launch.targetDate),
-    []
-  );
+export function LaunchCountdown(): React.JSX.Element {
+  const target = useMemo(() => new Date(siteConfig.launch.targetDate), []);
   const [units, setUnits] = useState<CountdownUnit[]>(() =>
     getTimeDifference(target)
   );
@@ -41,7 +39,9 @@ export function LaunchCountdown() {
       setUnits(getTimeDifference(target));
     }, 1000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+    };
   }, [target]);
 
   return (

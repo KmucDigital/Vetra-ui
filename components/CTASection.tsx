@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+
 import { ArrowRight, Check } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 
-export function CTASection() {
+export function CTASection(): React.JSX.Element {
   return (
     <section
       className="relative overflow-hidden border-t border-white/5 py-24 md:py-32"
@@ -39,7 +41,11 @@ export function CTASection() {
             </div>
 
             <Link href={siteConfig.cta.buttonHref} className="group">
-              <GlassButton active accent="#6B1F87" className="gap-3 px-7 py-3 text-base hover-lift">
+              <GlassButton
+                active
+                accent="#6B1F87"
+                className="gap-3 px-7 py-3 text-base hover-lift"
+              >
                 {siteConfig.cta.buttonText}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </GlassButton>
@@ -62,4 +68,3 @@ export function CTASection() {
     </section>
   );
 }
-

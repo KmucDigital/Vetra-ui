@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
+
 import {
   BadgeDollarSign,
   Bot,
@@ -19,27 +20,29 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
+
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
 
-type FeatureEntry = {
+interface FeatureEntry {
   id: string;
   title: string;
   description: string;
   highlight: string;
   icon: string;
   badge?: string;
-};
+}
 
 type FeatureCatalog = Record<PersonaId, FeatureEntry[]>;
 
-const personaCatalog = siteConfig.hero.personas as Array<
-  (typeof siteConfig.hero.personas)[number] & { id: PersonaId }
->;
+const personaCatalog = siteConfig.hero
+  .personas as ((typeof siteConfig.hero.personas)[number] & {
+  id: PersonaId;
+})[];
 const featureCatalog = siteConfig.featureSets as FeatureCatalog;
 
 const iconMap: Record<string, ComponentType<{ className?: string }>> = {
@@ -70,7 +73,7 @@ const layoutClasses = [
 
 const defaultPersona = siteConfig.hero.defaultPersona as PersonaId;
 
-export function Features() {
+export function Features(): React.JSX.Element {
   const [persona, setPersona] = useState<PersonaId>(defaultPersona);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 });
@@ -86,23 +89,30 @@ export function Features() {
   }, [personaConfig.id]);
 
   useEffect(() => {
-    const handler = (event: Event) => {
+    const handler = (event: Event): void => {
       const detail = (event as CustomEvent<{ persona?: string }>).detail;
-      if (!detail?.persona) return;
-      if (detail.persona in featureCatalog) {
-        setPersona(detail.persona as PersonaId);
+      const newPersona = detail.persona;
+      if (newPersona === undefined || newPersona === null) {
+        return;
+      }
+      if (newPersona in featureCatalog) {
+        setPersona(newPersona as PersonaId);
       }
     };
 
     window.addEventListener("vetra:persona-change", handler);
-    return () => window.removeEventListener("vetra:persona-change", handler);
+    return () => {
+      window.removeEventListener("vetra:persona-change", handler);
+    };
   }, []);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
-    const handlePointerMove = (event: PointerEvent) => {
+    const handlePointerMove = (event: PointerEvent): void => {
       const rect = container.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
@@ -114,7 +124,7 @@ export function Features() {
       });
     };
 
-    const handlePointerLeave = () => {
+    const handlePointerLeave = (): void => {
       setSpotlight((prev) => ({ ...prev, opacity: 0 }));
     };
 
@@ -164,7 +174,9 @@ export function Features() {
                 key={entry.id}
                 accent={entry.accent}
                 active={entry.id === personaConfig.id}
-                onClick={() => setPersona(entry.id)}
+                onClick={() => {
+                  setPersona(entry.id);
+                }}
               >
                 {entry.label}
               </GlassButton>
@@ -174,7 +186,7 @@ export function Features() {
 
         <div
           ref={containerRef}
-          className="relative mt-16 grid auto-rows-[minmax(180px,1fr)] gap-5 md:grid-cols-3"
+          className="relative mt-16 grid auto-rows-[minmax(180px,1fr)] gap-5 md:grid-cols-3 stagger-animation"
         >
           <div
             className="pointer-events-none absolute inset-0 rounded-[32px] transition-opacity duration-700"
@@ -199,19 +211,22 @@ export function Features() {
                 }}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_70%)]" />
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100" style={{
-                  background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
-                }} />
+                <div
+                  className="absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100"
+                  style={{
+                    background: `linear-gradient(135deg, ${personaConfig.accent}22, transparent 60%)`,
+                  }}
+                />
                 <div className="relative flex h-full flex-col gap-4">
                   <div className="flex items-center justify-between">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white">
                       <Icon className="h-5 w-5" />
                     </div>
-                    {feature.badge && (
+                    {feature.badge ? (
                       <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-secondary">
                         {feature.badge}
                       </span>
-                    )}
+                    ) : null}
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-xl font-semibold text-white">

@@ -20,6 +20,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 ### Reporting Bugs
 
 If you find a bug, please create an issue with:
+
 - A clear title and description
 - Steps to reproduce the issue
 - Expected vs actual behavior
@@ -29,6 +30,7 @@ If you find a bug, please create an issue with:
 ### Suggesting Features
 
 We love new ideas! Please create an issue with:
+
 - A clear description of the feature
 - Why this feature would be useful
 - Possible implementation approach

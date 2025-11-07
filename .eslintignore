@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+dist
+build
+*.config.js
+*.config.mjs
+.eslintrc.js
+
+# JSX files - strict TypeScript rules don't apply
+**/*.jsx

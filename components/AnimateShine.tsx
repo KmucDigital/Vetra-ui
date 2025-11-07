@@ -1,21 +1,23 @@
 "use client";
 
 import type { CSSProperties } from "react";
+
 import { cn } from "@/lib/utils";
 
 interface AnimateShineProps {
   text: string;
   speed?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 export function AnimateShine({
   text,
   speed = 5,
   className,
-  as: Component = "span",
-}: AnimateShineProps) {
+  as: component = "span",
+}: AnimateShineProps): React.JSX.Element {
+  const Component = component;
   return (
     <Component
       className={cn(
@@ -39,4 +41,3 @@ export function AnimateShine({
     </Component>
   );
 }
-

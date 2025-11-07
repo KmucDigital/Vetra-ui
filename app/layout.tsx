@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import localFont from "next/font/local";
-import "./globals.css";
+
 import { siteConfig } from "@/lib/siteConfig";
+
+import type { Metadata } from "next";
+
+import "./globals.css";
 
 // Lazy load CursorBackground (only loads on desktop, includes Framer Motion)
 // This prevents loading 169KB Framer Motion bundle on mobile where it's not used
@@ -98,7 +101,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): React.JSX.Element {
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
       <head>

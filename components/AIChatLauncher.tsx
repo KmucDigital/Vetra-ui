@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+
 import { MessageCircle, X } from "lucide-react";
+
 import { AnimateShine } from "@/components/AnimateShine";
 import { GlassButton } from "@/components/GlassButton";
 
 const STORAGE_KEY = "vetra-chat-session";
 
-function createConversationId() {
+function createConversationId(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
     return crypto.randomUUID();
   }
@@ -16,7 +18,7 @@ function createConversationId() {
     .slice(2, 10)}`;
 }
 
-export function AIChatLauncher() {
+export function AIChatLauncher(): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
@@ -38,7 +40,8 @@ export function AIChatLauncher() {
   }, []);
 
   const sessionLabel = useMemo(
-    () => (conversationId ? conversationId.split("-")[1] ?? "session" : "session"),
+    () =>
+      conversationId ? (conversationId.split("-")[1] ?? "session") : "session",
     [conversationId]
   );
 
@@ -47,7 +50,7 @@ export function AIChatLauncher() {
       className="fixed bottom-6 right-6 z-[80] flex flex-col items-end gap-4"
       data-ai-chat-root
     >
-      {isOpen && (
+      {isOpen ? (
         <div className="relative w-[min(420px,calc(100vw-3rem))] overflow-hidden rounded-3xl border border-white/12 bg-black/80 p-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 glass-surface-deep gpu-accelerated">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(126,34,206,0.35),transparent_70%)]" />
           <div className="relative flex items-center justify-between">
@@ -86,12 +89,17 @@ export function AIChatLauncher() {
             className="relative mt-4 flex flex-col gap-3"
             onSubmit={(event) => {
               event.preventDefault();
-              if (!draft.trim()) return;
+              if (!draft.trim()) {
+                return;
+              }
               // Placeholder: integrate with actual chat backend.
               setDraft("");
             }}
           >
-            <label htmlFor="vetra-chat-input" className="text-xs text-secondary">
+            <label
+              htmlFor="vetra-chat-input"
+              className="text-xs text-secondary"
+            >
               Your Message
             </label>
             <textarea
@@ -99,17 +107,25 @@ export function AIChatLauncher() {
               className="min-h-[96px] w-full resize-none rounded-2xl border border-white/10 bg-black/60 p-4 text-sm text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/50 glass-surface touch-target"
               placeholder="Try: Generate a hero section with spotlight hover states."
               value={draft}
-              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setDraft(event.target.value)}
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setDraft(event.target.value);
+              }}
             />
             <div className="flex items-center justify-between text-xs text-secondary">
-              <span>Stubbed demo. Connect your AI backend to enable replies.</span>
-              <GlassButton accent="#7E22CE" className="px-4 py-2 text-xs" onClick={toggleOpen}>
+              <span>
+                Stubbed demo. Connect your AI backend to enable replies.
+              </span>
+              <GlassButton
+                accent="#7E22CE"
+                className="px-4 py-2 text-xs"
+                onClick={toggleOpen}
+              >
                 Close
               </GlassButton>
             </div>
           </form>
         </div>
-      )}
+      ) : null}
 
       <GlassButton
         accent="#6B1F87"

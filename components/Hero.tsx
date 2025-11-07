@@ -1,23 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+
+import Link from "next/link";
+
 import { ArrowRight, Sparkles } from "lucide-react";
-import { siteConfig } from "@/lib/siteConfig";
-import { Badge } from "@/components/ui/badge";
-import { GlassButton } from "@/components/GlassButton";
+
 import { AnimateShine } from "@/components/AnimateShine";
+import { GlassButton } from "@/components/GlassButton";
 import { LaunchCountdown } from "@/components/LaunchCountdown";
-// @ts-ignore - TextType is a JSX component
 import TextType from "@/components/TextType";
+import { Badge } from "@/components/ui/badge";
+import { siteConfig } from "@/lib/siteConfig";
 
 type PersonaId = keyof typeof siteConfig.featureSets;
-type PersonaEntry = (typeof siteConfig.hero.personas)[number] & { id: PersonaId };
+type PersonaEntry = (typeof siteConfig.hero.personas)[number] & {
+  id: PersonaId;
+};
 
 const personas = siteConfig.hero.personas as PersonaEntry[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Typewriter: any = TextType;
 
-export function Hero() {
+// Hero component is complex due to persona switching and animations
+// Breaking it into smaller components would reduce readability
+// eslint-disable-next-line max-lines-per-function
+export function Hero(): React.JSX.Element {
   const [activePersona, setActivePersona] = useState<PersonaId>(
     siteConfig.hero.defaultPersona as PersonaId
   );
@@ -46,7 +54,10 @@ export function Hero() {
       <div className="container relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 pb-24 md:px-8">
         <div className="flex flex-col items-center gap-10 text-center">
           <div className="flex flex-col items-center gap-4">
-            <Badge variant="glass" className="flex items-center gap-2 px-4 py-2 gpu-accelerated hover-lift">
+            <Badge
+              variant="glass"
+              className="flex items-center gap-2 px-4 py-2 gpu-accelerated hover-lift"
+            >
               <Sparkles className="h-4 w-4 text-amber-300" />
               <span className="text-sm font-semibold">
                 Free Open Source Template · iptpodate License
@@ -68,7 +79,9 @@ export function Hero() {
                 key={entry.id}
                 accent={entry.accent}
                 active={persona.id === entry.id}
-                onClick={() => setActivePersona(entry.id)}
+                onClick={() => {
+                  setActivePersona(entry.id);
+                }}
               >
                 {entry.label}
               </GlassButton>
@@ -85,7 +98,7 @@ export function Hero() {
                   text={[persona.heroTitle]}
                   typingSpeed={70}
                   pauseDuration={1200}
-                  showCursor={true}
+                  showCursor
                   cursorCharacter="|"
                   loop={false}
                 />
@@ -101,7 +114,7 @@ export function Hero() {
             <GlassButton
               accent={persona.accent}
               active
-              className="gap-3 px-7 py-3 text-base font-semibold md:text-lg"
+              className="gap-3 px-7 py-3 text-base font-semibold md:text-lg glow-effect"
             >
               {persona.ctaText}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -142,7 +155,7 @@ export function Hero() {
         <div className="relative mt-16 w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.02] p-6 backdrop-blur-2xl md:p-10 glass-surface-deep gpu-accelerated">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(126,34,206,0.28),transparent_65%)]" />
           <div className="relative grid gap-6 md:grid-cols-2">
-            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-black/60 p-6 shadow-2xl glass-surface hover-lift">
+            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-black/60 p-6 shadow-2xl glass-surface hover-lift float-animation">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(209,9,76,0.4),transparent_70%)] opacity-80" />
               <div className="relative flex flex-col gap-4">
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -164,7 +177,7 @@ export function Hero() {
                   {[1, 2, 3, 4].map((item) => (
                     <div
                       key={`dark-card-${item}`}
-                      className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover-lift"
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover-lift shimmer-border"
                     >
                       <div className="mb-3 h-10 w-10 rounded-xl bg-gradient-to-br from-white/15 to-white/5" />
                       <div className="h-2 w-3/4 rounded-full bg-white/20" />
@@ -174,7 +187,10 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.85] p-6 shadow-2xl glass-surface hover-lift">
+            <div
+              className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.85] p-6 shadow-2xl glass-surface hover-lift float-animation"
+              style={{ animationDelay: "1s" }}
+            >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(47,109,255,0.35),transparent_70%)] opacity-90" />
               <div className="relative flex flex-col gap-4 text-black">
                 <div className="flex items-center justify-between border-b border-black/10 pb-4">
@@ -196,7 +212,7 @@ export function Hero() {
                   {[1, 2, 3, 4].map((item) => (
                     <div
                       key={`light-card-${item}`}
-                      className="rounded-2xl border border-black/5 bg-white p-4 shadow-sm hover-lift"
+                      className="rounded-2xl border border-black/5 bg-white p-4 shadow-sm hover-lift shimmer-border"
                     >
                       <div className="mb-3 h-10 w-10 rounded-xl bg-gradient-to-br from-slate-200 to-slate-100" />
                       <div className="h-2 w-3/4 rounded-full bg-black/10" />

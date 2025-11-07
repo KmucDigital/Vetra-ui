@@ -7,7 +7,6 @@ Generiert mit **KMUC Dev CLI**
 - **Typ**: nextjs
 - **Port**: 8085
 
-
 - **Deployment**: vps
 
 ## Setup
@@ -15,11 +14,13 @@ Generiert mit **KMUC Dev CLI**
 ### Lokal starten
 
 1. Kopiere `.env.example` zu `.env` und passe die Werte an:
+
 ```bash
 cp .env.example .env
 ```
 
 2. Starte die Container:
+
 ```bash
 docker-compose up -d
 ```
@@ -38,19 +39,16 @@ docker-compose logs -f
 docker-compose down
 ```
 
-
 ## Deployment
 
 ### VPS Deployment
 
 1. Stelle sicher, dass du SSH-Zugriff hast
 2. Führe das Deploy-Script aus:
+
 ```bash
 ./scripts/deploy.sh
 ```
-
-
-
 
 ## Lizenz
 

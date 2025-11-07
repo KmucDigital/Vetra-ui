@@ -208,7 +208,8 @@ export const siteConfig = {
   },
 
   glassButton: {
-    gradient: "linear-gradient(120deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04))",
+    gradient:
+      "linear-gradient(120deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04))",
     border: "rgba(255,255,255,0.25)",
     glow: "0 12px 40px rgba(126, 34, 206, 0.35)",
   },
@@ -312,8 +313,14 @@ export const siteConfig = {
         title: "Product",
         links: [
           { label: "Features", href: "#features" },
-          { label: "Documentation", href: "https://github.com/kmucdigital/vetra-ui" },
-          { label: "GitHub Repository", href: "https://github.com/kmucdigital/vetra-ui" },
+          {
+            label: "Documentation",
+            href: "https://github.com/kmucdigital/vetra-ui",
+          },
+          {
+            label: "GitHub Repository",
+            href: "https://github.com/kmucdigital/vetra-ui",
+          },
           { label: "License & Notice", href: "/license" },
         ],
       },
@@ -321,9 +328,18 @@ export const siteConfig = {
         title: "Resources",
         links: [
           { label: "Components", href: "#features" },
-          { label: "Templates", href: "https://github.com/kmucdigital/vetra-ui" },
-          { label: "Examples", href: "https://github.com/kmucdigital/vetra-ui/tree/main/examples" },
-          { label: "Changelog", href: "https://github.com/kmucdigital/vetra-ui/releases" },
+          {
+            label: "Templates",
+            href: "https://github.com/kmucdigital/vetra-ui",
+          },
+          {
+            label: "Examples",
+            href: "https://github.com/kmucdigital/vetra-ui/tree/main/examples",
+          },
+          {
+            label: "Changelog",
+            href: "https://github.com/kmucdigital/vetra-ui/releases",
+          },
         ],
       },
       {
@@ -332,7 +348,10 @@ export const siteConfig = {
           { label: "GitHub", href: "https://github.com/kmucdigital" },
           { label: "Main Page", href: "https://kmuc.online" },
           { label: "Contact", href: "https://kmuc.online/impressum" },
-          { label: "Support", href: "https://github.com/kmucdigital/vetra-ui/issues" },
+          {
+            label: "Support",
+            href: "https://github.com/kmucdigital/vetra-ui/issues",
+          },
         ],
       },
       {
@@ -346,7 +365,11 @@ export const siteConfig = {
       },
     ],
     social: [
-      { name: "GitHub", href: "https://github.com/kmucdigital", icon: "github" },
+      {
+        name: "GitHub",
+        href: "https://github.com/kmucdigital",
+        icon: "github",
+      },
       { name: "Website", href: "https://kmuc.online", icon: "globe" },
     ],
   },
@@ -354,9 +377,21 @@ export const siteConfig = {
   navigation: [
     { label: "Features", href: "#features" },
     { label: "License", href: "/license" },
-    { label: "GitHub", href: "https://github.com/kmucdigital/vetra-ui", external: true },
-    { label: "Impressum", href: "https://kmuc.online/impressum", external: true },
-    { label: "Datenschutz", href: "https://kmuc.online/datenschutz", external: true },
+    {
+      label: "GitHub",
+      href: "https://github.com/kmucdigital/vetra-ui",
+      external: true,
+    },
+    {
+      label: "Impressum",
+      href: "https://kmuc.online/impressum",
+      external: true,
+    },
+    {
+      label: "Datenschutz",
+      href: "https://kmuc.online/datenschutz",
+      external: true,
+    },
   ],
 };
 

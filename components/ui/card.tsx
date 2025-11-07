@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<
@@ -32,6 +33,7 @@ const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
+  // eslint-disable-next-line jsx-a11y/heading-has-content
   <h3
     ref={ref}
     className={cn(
@@ -47,11 +49,7 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-zinc-200", className)}
-    {...props}
-  />
+  <p ref={ref} className={cn("text-sm text-zinc-200", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 
@@ -75,4 +73,11 @@ const CardFooter = React.forwardRef<
 ));
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+};
