@@ -4,10 +4,10 @@ services:
     container_name: vetra-app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "8085:8085"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=8085
     volumes:
       - ./:/app
       - /app/node_modules

@@ -39,6 +39,11 @@ nul
 .dockerignore
 docker-compose.override.yml
 
+# KMUC Deploy Scripts (contain server credentials)
+scripts/deploy.sh
+scripts/setup-domain.sh
+scripts/docker-helpers.sh
+
 # misc
 .DS_Store
 Thumbs.db
@@ -70,3 +75,5 @@ yarn-error.log*
 next-env.d.ts
 COMMIT.md
 CLAUDE.md
+.kmuc-temp/server-deploy.sh
+vetra.tar.gz
