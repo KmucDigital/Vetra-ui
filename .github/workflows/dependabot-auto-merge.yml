@@ -1,0 +1,169 @@
+name: Dependabot Smart Auto-Merge
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    # Nur für Dependabot PRs
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run typecheck
+        run: pnpm typecheck
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run build
+        run: pnpm build
+
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Check if auto-merge allowed
+        id: check
+        run: |
+          PACKAGE="${{ steps.metadata.outputs.dependency-names }}"
+          UPDATE_TYPE="${{ steps.metadata.outputs.update-type }}"
+          DEPENDENCY_TYPE="${{ steps.metadata.outputs.dependency-type }}"
+
+          echo "Package: $PACKAGE"
+          echo "Update Type: $UPDATE_TYPE"
+          echo "Dependency Type: $DEPENDENCY_TYPE"
+
+          # KRITISCHE PACKAGES - NIE auto-merge
+          CRITICAL_PACKAGES=(
+            "next"
+            "react"
+            "react-dom"
+            "framer-motion"
+            "tailwindcss"
+          )
+
+          # SAFE PACKAGES - immer auto-merge (patch + minor)
+          SAFE_PACKAGES=(
+            "kmuc-dev-cli"
+            "lucide-react"
+            "clsx"
+            "class-variance-authority"
+            "tailwind-merge"
+            "tailwindcss-animate"
+          )
+
+          # DEVDEPS - auto-merge patch + minor
+          # (eslint, prettier, typescript, types)
+
+          AUTO_MERGE="false"
+          REASON="Unknown"
+
+          # Check if package is critical
+          for critical in "${CRITICAL_PACKAGES[@]}"; do
+            if [[ "$PACKAGE" == *"$critical"* ]]; then
+              echo "⚠️ CRITICAL package detected: $critical"
+              if [[ "$UPDATE_TYPE" == "version-update:semver-patch" ]]; then
+                AUTO_MERGE="true"
+                REASON="Critical package, but only patch update"
+              else
+                AUTO_MERGE="false"
+                REASON="Critical package with $UPDATE_TYPE - needs manual review"
+              fi
+              break
+            fi
+          done
+
+          # Check if package is in safe list
+          if [[ "$AUTO_MERGE" == "false" ]]; then
+            for safe in "${SAFE_PACKAGES[@]}"; do
+              if [[ "$PACKAGE" == *"$safe"* ]]; then
+                if [[ "$UPDATE_TYPE" == "version-update:semver-patch" ]] || [[ "$UPDATE_TYPE" == "version-update:semver-minor" ]]; then
+                  AUTO_MERGE="true"
+                  REASON="Safe package with $UPDATE_TYPE"
+                else
+                  AUTO_MERGE="false"
+                  REASON="Safe package, but major update - needs review"
+                fi
+                break
+              fi
+            done
+          fi
+
+          # DevDependencies - auto-merge patch + minor
+          if [[ "$AUTO_MERGE" == "false" ]] && [[ "$DEPENDENCY_TYPE" == "direct:development" ]]; then
+            if [[ "$UPDATE_TYPE" == "version-update:semver-patch" ]] || [[ "$UPDATE_TYPE" == "version-update:semver-minor" ]]; then
+              AUTO_MERGE="true"
+              REASON="DevDependency with $UPDATE_TYPE"
+            else
+              AUTO_MERGE="false"
+              REASON="DevDependency major update - needs review"
+            fi
+          fi
+
+          # Default fallback: nur patch updates
+          if [[ "$AUTO_MERGE" == "false" ]]; then
+            if [[ "$UPDATE_TYPE" == "version-update:semver-patch" ]]; then
+              AUTO_MERGE="true"
+              REASON="Patch update (safe by default)"
+            else
+              AUTO_MERGE="false"
+              REASON="$UPDATE_TYPE requires manual review"
+            fi
+          fi
+
+          echo "auto_merge=$AUTO_MERGE" >> $GITHUB_OUTPUT
+          echo "reason=$REASON" >> $GITHUB_OUTPUT
+
+          echo "🤖 Decision: AUTO_MERGE=$AUTO_MERGE"
+          echo "📝 Reason: $REASON"
+
+      - name: Auto-approve and merge
+        if: steps.check.outputs.auto_merge == 'true'
+        run: |
+          echo "✅ Auto-merging: ${{ steps.check.outputs.reason }}"
+          gh pr review --approve "$PR_URL"
+          gh pr merge --auto --squash --delete-branch "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on manual review required
+        if: steps.check.outputs.auto_merge == 'false'
+        run: |
+          gh pr comment "$PR_URL" --body "⚠️ **Manual review required**
+
+          **Reason:** ${{ steps.check.outputs.reason }}
+
+          **Package:** \`${{ steps.metadata.outputs.dependency-names }}\`
+          **Update Type:** \`${{ steps.metadata.outputs.update-type }}\`
+          **Dependency Type:** \`${{ steps.metadata.outputs.dependency-type }}\`
+
+          Please review the changes and merge manually if safe."
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
